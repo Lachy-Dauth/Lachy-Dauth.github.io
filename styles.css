@@ -3,6 +3,7 @@
   --main-red: #be3144;
   --main-blue: #45567d;
   --main-grey: #303841;
+  --nav-height: 6rem;
 }
 
 * {
@@ -40,7 +41,7 @@ nav {
   width: 100%;
   background-color: var(--main-red);
   display: flex;
-  height: 6rem;
+  height: var(--nav-height);
   justify-content: space-between;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.548);
   z-index: 999;
@@ -98,15 +99,31 @@ nav {
   
   .nav-link {
     padding: 0.95rem 0.5rem;
+    z-index: 4;
   }
 
   .nav-header {
     position: fixed;
+    font-size: 0rem;
+    z-index: 1;
     color: transparent;
   }
 }
 
+@media (max-width: 500px) {
+  .nav-list {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  :root {
+    --nav-height: 8rem;
+  }
+}
+
 h2 {
+  padding: 2rem;
   font-size: 4rem;
 }
 
@@ -114,7 +131,7 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 6rem;
+  padding-top: var(--nav-height);
   padding-bottom: 0rem;
   width: 100%;
   height: auto;
@@ -137,8 +154,6 @@ h2 {
   font-size: 6rem;
 }
 
-
-
 #intro > p {
   color: var(--main-red);
   font-style: italic;
@@ -160,8 +175,8 @@ h2 {
   background-image: linear-gradient(62deg, #3a3d40 0%, #181719 100%);
   opacity: 0.9;
   position: absolute;
-  top: -6rem;
-  bottom: -6rem;
+  top: calc(-1 * var(--nav-height));
+  bottom: calc(-1 * var(--nav-height));
   left: 0;
   right: 0;
   z-index: 0;
@@ -211,6 +226,14 @@ p {
   background-color: var(--main-blue);
 }
 
+#School-Projects {
+  background-color: var(--main-white);
+}
+
+#School-Projects > header > h2 {
+  color: var(--main-grey);
+}
+
 #python {
   background-color: var(--main-red);
 }
@@ -235,6 +258,12 @@ p {
   column-gap: 4rem;
   row-gap: 4rem;
   margin-bottom: 4rem;
+}
+
+@media (max-width: 450px) {
+  .projects-win {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 }
 
 .project {
@@ -322,12 +351,14 @@ footer > p {
 
 #contact > header > h2 {
   margin: 2rem;
+  text-align: center;
   color: var(--main-white);
 }
 
 #contact > ul {
-  margin: 4rem;
+  margin: 4rem 4rem 4rem 0rem;
   display: flex;
+  align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -341,12 +372,11 @@ footer > p {
 
 #contact > ul > li {
   color: var(--main-white);
-  text-decoration: none;
-  margin: 0px;
   padding: 0px;
   text-align: center;
   width: max-content;
   transition: transform 0.3s ease;
+  margin: 1rem 0rem;
 }
 
 #contact > ul > li > a {
@@ -359,7 +389,11 @@ footer > p {
   transform: translateY(8px);
 }
 
-.fa-at {
+.at-icon {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 700;
+}
+
+#certificates {
+  background-color: var(--main-white);
 }
