@@ -109,13 +109,12 @@ nav {
     z-index: 1;
     color: transparent;
   }
-  
+
   .nav-list {
     display: flex;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    overflow-y: hidden;
   }
   :root {
     --nav-height: 10rem;
@@ -228,6 +227,10 @@ p {
 
 #School-Projects {
   background-color: var(--main-white);
+}
+
+#JavaScript-Projects {
+  background-color: var(--main-blue);
 }
 
 #School-Projects > header > h2 {

@@ -1,3 +1,3 @@
 # Personal website
 
-link: https://lachy-dauth.github.io
+link: https://lachy-dauth.github.io/Personal-Website/
