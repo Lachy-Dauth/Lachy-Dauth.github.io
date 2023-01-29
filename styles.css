@@ -225,7 +225,7 @@ p {
   background-color: var(--main-blue);
 }
 
-#School-Projects {
+#YouTube-Projects {
   background-color: var(--main-white);
 }
 
@@ -233,7 +233,7 @@ p {
   background-color: var(--main-blue);
 }
 
-#School-Projects > header > h2 {
+#YouTube-Projects > header > h2 {
   color: var(--main-grey);
 }
 
@@ -407,4 +407,8 @@ footer > p {
 
 #certificates {
   background-color: var(--main-white);
+}
+
+iframe {
+  aspect-ratio: 16/9;
 }
