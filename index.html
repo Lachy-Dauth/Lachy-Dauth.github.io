@@ -2,100 +2,353 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lachan Work With Me</title>
+  <title>Lachlan Dauth</title>
   <link rel="stylesheet" href="./styles.css">
   <script src="https://kit.fontawesome.com/ed98a6bd6b.js" crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;900&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
-  <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKuGJste39CH7avzHNB5XYqxcybpip7o92QQ&usqp=CAU" type="image/icon type">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- NAV -->
   <nav id="navbar">
-    <header class="nav-header">Lachan Dauth</header>
+    <a href="#hero" class="nav-brand">Lachlan Dauth</a>
     <ul class="nav-list">
-      <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-      <li class="nav-item"><a href="#work" class="nav-link">Work</a></li>
-      <li class="nav-item"><a href="./projects.html" class="nav-link">All projects</a></li>
-      <li class="nav-item"><a href="#certificates" class="nav-link">Certificates</a></li>
-      <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#resume" class="nav-link">Resume</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
     </ul>
   </nav>
+
   <main>
-    <section class="project-sec" id="about">
-      <h1>Hey, I'm Lachlan Dauth</h1>
-      <p>a web and python developer</p>
-    </section>
-    <section class="project-sec" id="work">
-      <header><h2>These are some of my best projects</h2></header>
-      <br>
-      <div class="projects-win">
-        <a href="https://wordlesolver.github.io/game" target="_blank" class="project-link"><div class="project" id="u1-project-4">
-          <img 
-          src="./images/wordle-clone.png" 
-          alt="" 
-          class="project-thumb">
-          <header class="thumb-header"><span class="orange-code">&lt; </span>Wordle Clone<span class="orange-code"> &#47;&gt;</span></header>
-        </div></a>
-        <a href="https://lachy-dauth.github.io/chess-engine/" target="_blank" class="project-link"><div class="project" id="chess-engine">
-          <img 
-          src="./images/Chess-engine.png" 
-          alt="" 
-          class="project-thumb">
-          <header class="thumb-header"><span class="orange-code">&lt; </span>JS Chess Engine<span class="orange-code"> &#47;&gt;</span></header>
-        </div></a>
-        <a href="https://lachy-dauth.github.io/odin-calculator/" target="_blank" class="project-link"><div class="project" id="odin-calculator">
-          <img 
-          src="./images/odin-calc.png" 
-          alt="" 
-          class="project-thumb">
-          <header class="thumb-header"><span class="orange-code">&lt; </span>Calculator<span class="orange-code"> &#47;&gt;</span></header>
-        </div></a>
-        <a href="https://wordlesolver.github.io/" target="_blank" class="project-link"><div class="project" id="u1-project-4">
-          <img 
-          src="./images/wordle-solver.png" 
-          alt="" 
-          class="project-thumb">
-          <header class="thumb-header"><span class="orange-code">&lt; </span>Wordle Solver<span class="orange-code"> &#47;&gt;</span></header>
-        </div></a>
-        <a href="https://lachy-dauth.github.io/Chem-Balencer/" target="_blank" class="project-link"><div class="project" id="u1-project-4">
-          <img 
-          src="./images/chemistry-solver.png" 
-          alt="image of chemistry solver site" 
-          class="project-thumb">
-          <header class="thumb-header"><span class="orange-code">&lt; </span>Chemistry Balancer<span class="orange-code"> &#47;&gt;</span></header>
-        </div></a>
-        <a href="https://www.youtube.com/watch?v=qaag9lN3sv8&t=1s&ab_channel=LachyDauth" class="project-link" target="_blank"><div class="project" id="3D-printing">
-          <iframe width="100%" src="https://www.youtube.com/embed/qaag9lN3sv8" title="AI learns to play snake using Genetic Algorithm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          <header class="thumb-header"><span class="orange-code">&lt; </span>AI learns to play snake<span class="orange-code"> &#47;&gt;</span></header>
-        </div></a>
-        <a href="https://github.com/Lachy-Dauth/AI-learns-to-drive/" class="project-link" target="_blank"><div class="project" id="python-AI-driving">
-          <img 
-          src="./images/AI-Racing.png" 
-          alt="AI cars driving around a race track" 
-          class="project-thumb">
-          <header class="thumb-header"><span class="orange-code">&lt; </span>Python AI Racing<span class="orange-code"> &#47;&gt;</span></header>
-        </div></a>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-content">
+        <p class="hero-tag">Computer Science @ UNSW &nbsp;·&nbsp; WAM 91</p>
+        <h1>Lachlan Dauth</h1>
+        <p class="hero-sub">
+          Upcoming trading intern at <span class="accent">Jane Street</span> &amp; <span class="accent">IMC Trading</span>,
+          and SWE intern at <span class="accent">Hudson River Trading</span>.
+          AIO Gold medalist &amp; AMO Bronze medalist.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary">View Projects</a>
+          <a href="#resume" class="btn-outline">Resume</a>
+        </div>
       </div>
-      <a 
-      href="./projects.html" 
-      class="btn" id="btn-show-all">
-        Show All<i class="fas fa-chevron-right"></i>
-      </a>
+      <div class="hero-scroll-hint">
+        <i class="fas fa-chevron-down"></i>
+      </div>
     </section>
-    <section class="project-sec" id="contact">
-      <header><h2>Let's work together...</h2></header>
-      <p>How would you like to meet?</p>
-      <ul cl>
-        <li><a href="https://github.com/Lachy-Dauth" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/lachlan-dauth-9b3951235/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-        <li><a href="https://www.instagram.com/lachlandauth" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
-        <li><a href="mailto: lachlandauth@outlook.com" target="_blank"><i class="fa-solid fa-envelope"></i> Email Me</a></li>
-      </ul>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-inner">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-sub">Selected technical work</p>
+
+        <div class="projects-grid">
+
+          <div class="project-card">
+            <div class="project-img-wrap project-img-wrap--paper">
+              <div class="paper-preview">
+                <span class="paper-icon"><i class="fas fa-file-alt"></i></span>
+                <span class="paper-title">Ramsey Numbers &amp; Extremal Graphs</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="tag">Research</span>
+                <span class="tag">Combinatorics</span>
+                <span class="tag">Algorithms</span>
+                <span class="tag">Python</span>
+              </div>
+              <h3>Ramsey Numbers Research</h3>
+              <p>COMP3821 (Extended Algorithm Design and Analysis) research project. Investigated computational bounds on Ramsey numbers and properties of extremal Ramsey graphs. My contributions: computationally disproving the Extension Conjecture and Degree Difference Conjecture via counterexample search on McKay's graph database, and implementing a 3-colour Ramsey graph generator to find lower bounds.</p>
+              <div class="project-actions">
+                <a href="./COMP3821_Project.pdf" download class="project-action-btn project-action-btn--primary">
+                  <i class="fas fa-download"></i> Download PDF
+                </a>
+                <a href="https://github.com/Lachy-Dauth/3821-Ramsey" target="_blank" class="project-action-btn">
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <a href="https://lachy-dauth.github.io/chess-engine/" target="_blank" class="project-card">
+            <div class="project-img-wrap">
+              <img src="./images/Chess-engine.png" alt="JS Chess Engine" class="project-img">
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">AI</span>
+                <span class="tag">Algorithms</span>
+              </div>
+              <h3>JS Chess Engine</h3>
+              <p>A fully playable chess engine with an AI opponent built from scratch in JavaScript, including move generation, board evaluation, and minimax with alpha-beta pruning.</p>
+              <span class="project-link-label">Play it <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </a>
+
+          <a href="https://wordlesolver.github.io/" target="_blank" class="project-card">
+            <div class="project-img-wrap">
+              <img src="./images/wordle-solver.png" alt="Wordle Solver" class="project-img">
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">Information Theory</span>
+                <span class="tag">Algorithms</span>
+              </div>
+              <h3>Wordle Solver</h3>
+              <p>An optimal Wordle solver using information theory — each guess is chosen to maximise expected information gain, consistently solving the puzzle in under 4 guesses.</p>
+              <span class="project-link-label">Try it <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </a>
+
+          <div class="project-card project-card--video">
+            <div class="project-video-wrap">
+              <iframe src="https://www.youtube.com/embed/qaag9lN3sv8" title="AI learns to play snake" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="tag">Python</span>
+                <span class="tag">Genetic Algorithm</span>
+                <span class="tag">Neural Networks</span>
+              </div>
+              <h3>AI Learns to Play Snake</h3>
+              <p>A neural network trained with a genetic algorithm to play Snake. Agents evolve across generations, with natural selection favouring higher-scoring individuals.</p>
+            </div>
+          </div>
+
+          <div class="project-card project-card--video">
+            <div class="project-video-wrap">
+              <iframe src="https://www.youtube.com/embed/ZNLYiP7lYWw" title="AI learns to Drive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="tag">Python</span>
+                <span class="tag">Deep Learning</span>
+                <span class="tag">Evolutionary AI</span>
+              </div>
+              <h3>AI Learns to Drive</h3>
+              <p>Cars guided by neural networks learn to navigate a race track through evolutionary training. Raycasting sensors feed into the network; fitter agents reproduce each generation.</p>
+            </div>
+          </div>
+
+          <div class="project-card project-card--video">
+            <div class="project-video-wrap">
+              <iframe src="https://www.youtube.com/embed/j0--xt6fRqE" title="8-bit Minecraft Computer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="tag">Computer Architecture</span>
+                <span class="tag">Logic Gates</span>
+                <span class="tag">Assembly</span>
+              </div>
+              <h3>8-bit Minecraft Computer</h3>
+              <p>A fully functional 8-bit computer built from redstone logic gates in Minecraft, capable of running custom assembly programs — including Fibonacci and multiplication algorithms.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
-    <footer>
-      <p>Made by Lachlan Dauth</p>
-    </footer>
+
+    <!-- RESUME -->
+    <section id="resume">
+      <div class="section-inner">
+        <h2 class="section-title">Resume</h2>
+        <p class="section-sub">
+          Sydney, NSW &nbsp;·&nbsp;
+          <a href="mailto:lachydauth@gmail.com" class="accent-link">lachydauth@gmail.com</a> &nbsp;·&nbsp;
+          <a href="https://www.linkedin.com/in/lachlan-dauth-9b3951235/" target="_blank" class="accent-link">LinkedIn</a>
+        </p>
+
+        <div class="resume-grid">
+
+          <!-- EXPERIENCE -->
+          <div class="resume-col resume-col--wide">
+            <h3 class="resume-section-label"><i class="fas fa-briefcase"></i> Experience</h3>
+
+            <div class="resume-block resume-block--highlight">
+              <div class="resume-block-head">
+                <span class="resume-title">Upcoming Internships</span>
+              </div>
+              <ul class="resume-items">
+                <li>
+                  <strong>Trading Intern</strong> — Jane Street <span class="resume-loc">Hong Kong</span>
+                  <span class="resume-date">Jun – Sep 2026</span>
+                </li>
+                <li>
+                  <strong>Trading Intern</strong> — IMC Trading <span class="resume-loc">Sydney</span>
+                  <span class="resume-date">Nov 2026 – Jan 2027</span>
+                </li>
+                <li>
+                  <strong>Software Developer Intern</strong> — Hudson River Trading <span class="resume-loc">Singapore</span>
+                  <span class="resume-date">May – Aug 2027</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="resume-block">
+              <div class="resume-block-head">
+                <span class="resume-title">IMC Launchpad — Trader Stream</span>
+                <span class="resume-date-inline">Sep 2025</span>
+              </div>
+              <p class="resume-sub-title">Sydney, NSW</p>
+              <ul class="resume-items">
+                <li>Received Trading Internship offer for summer 2026–27</li>
+                <li>Achieved 1st place in the final trading competition across all participants</li>
+              </ul>
+            </div>
+
+            <div class="resume-block">
+              <div class="resume-block-head">
+                <span class="resume-title">WiseTech Global</span>
+                <span class="resume-date-inline">Jan – Oct 2025</span>
+              </div>
+              <p class="resume-sub-title">Associate Software Engineer · Sydney, NSW</p>
+              <ul class="resume-items">
+                <li>Designed and maintained ETL pipelines to load logistics data into the analytics team's database</li>
+                <li>Worked on <em>Issue Manager</em>, a BERT-based ML model for automatic issue routing to engineering teams</li>
+              </ul>
+            </div>
+
+            <div class="resume-block">
+              <div class="resume-block-head">
+                <a href="https://www.narwhaltutoring.com/" target="_blank" class="resume-title-link"><span class="resume-title">Narwhal Tutoring</span></a>
+                <span class="resume-date-inline">Dec 2024 – Jan 2025</span>
+              </div>
+              <p class="resume-sub-title">Web Developer · Perth, WA</p>
+              <ul class="resume-items">
+                <li>Improved UX and automated business processes for tutors and clients</li>
+              </ul>
+            </div>
+
+            <div class="resume-block">
+              <div class="resume-block-head">
+                <span class="resume-title">3E Learning</span>
+                <span class="resume-date-inline">Jan – Dec 2024</span>
+              </div>
+              <p class="resume-sub-title">Mathematics Tutor · Perth, WA</p>
+              <ul class="resume-items">
+                <li>Tutored years 6–8 students in Mathematics and Python programming</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN -->
+          <div class="resume-col">
+
+            <!-- EDUCATION -->
+            <h3 class="resume-section-label"><i class="fas fa-graduation-cap"></i> Education</h3>
+
+            <div class="resume-block">
+              <div class="resume-block-head">
+                <span class="resume-title">UNSW Sydney</span>
+                <span class="resume-date-inline">2025 – 2027</span>
+              </div>
+              <p class="resume-sub-title">B.Sc. Computer Science · Sydney, NSW</p>
+              <ul class="resume-items">
+                <li><strong>WAM: 91</strong> (High Distinction, 85+)</li>
+              </ul>
+            </div>
+
+            <div class="resume-block">
+              <div class="resume-block-head">
+                <span class="resume-title">National Mathematics Summer School</span>
+                <span class="resume-date-inline">Jan 2024</span>
+              </div>
+              <p class="resume-sub-title">Canberra, ACT</p>
+              <ul class="resume-items">
+                <li>Selected among Australia's top high school mathematicians for a 2-week residential program in proof-based mathematics</li>
+              </ul>
+            </div>
+
+            <div class="resume-block">
+              <div class="resume-block-head">
+                <span class="resume-title">Scotch College, Perth</span>
+                <span class="resume-date-inline">2017 – 2024</span>
+              </div>
+              <p class="resume-sub-title">High School · Perth, WA</p>
+              <ul class="resume-items">
+                <li><strong>ATAR: 99.10</strong></li>
+                <li>Cross Country Co-Captain (2024), AMC Prize (2022), Olympiad mentorship, Da Vinci Decathlon</li>
+              </ul>
+            </div>
+
+            <div class="resume-block">
+              <div class="resume-block-head">
+                <span class="resume-title">Curtin University</span>
+                <span class="resume-date-inline">2022 – 2023</span>
+              </div>
+              <p class="resume-sub-title">Rising Scholars Program · Perth, WA</p>
+              <ul class="resume-items">
+                <li>Dual enrolment (Years 10–11) · <strong>WAM: 95</strong></li>
+              </ul>
+            </div>
+
+            <!-- AWARDS -->
+            <h3 class="resume-section-label" style="margin-top: 3rem;"><i class="fas fa-trophy"></i> Awards</h3>
+
+            <div class="awards-list">
+              <div class="award-item">
+                <span class="award-name">AIO Gold</span>
+                <span class="award-detail">Australian Informatics Olympiad · 2023 &amp; 2024</span>
+              </div>
+              <div class="award-item">
+                <span class="award-name">AMO Bronze</span>
+                <span class="award-detail">Australian Mathematics Olympiad · 2024</span>
+              </div>
+            </div>
+
+            <!-- SKILLS -->
+            <h3 class="resume-section-label" style="margin-top: 3rem;"><i class="fas fa-code"></i> Skills</h3>
+            <div class="skills-list">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">C</span>
+              <span class="skill-tag">C#</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">Vue</span>
+              <span class="skill-tag">Django</span>
+              <span class="skill-tag">NumPy</span>
+              <span class="skill-tag">Git</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-inner contact-inner">
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-sub">Feel free to reach out.</p>
+        <ul class="contact-list">
+          <li>
+            <a href="https://github.com/Lachy-Dauth" target="_blank">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/lachlan-dauth-9b3951235/" target="_blank">
+              <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href="mailto:lachydauth@gmail.com">
+              <i class="fa-solid fa-envelope"></i> Email
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
   </main>
 </body>
 </html>
