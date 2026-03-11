@@ -601,6 +601,65 @@ a.project-card:hover .paper-preview .paper-icon { opacity: 1; color: var(--accen
   font-family: var(--mono);
 }
 
+/* ─── HOBBIES ────────────────────────────────────────────────── */
+#hobbies {
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+}
+
+.pb-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .pb-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 380px) {
+  .pb-grid { grid-template-columns: 1fr; }
+}
+
+.pb-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.pb-distance {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.pb-time {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  font-family: var(--mono);
+  line-height: 1.1;
+}
+
+.pb-pace {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-family: var(--mono);
+}
+
+.pb-year {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
 /* ─── CONTACT ────────────────────────────────────────────────── */
 #contact {
   background: var(--bg);
