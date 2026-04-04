@@ -51,10 +51,29 @@
         <div class="projects-grid">
 
           <div class="project-card">
-            <div class="project-img-wrap project-img-wrap--paper">
-              <div class="paper-preview">
-                <span class="paper-icon"><i class="fas fa-file-alt"></i></span>
-                <span class="paper-title">Ramsey Numbers &amp; Extremal Graphs</span>
+            <div class="project-img-wrap project-img-wrap--ramsey">
+              <div class="ramsey-preview">
+                <svg class="ramsey-graph" viewBox="0 0 240 172" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <!-- Blue edges: outer pentagon 0-1, 1-2, 2-3, 3-4, 4-0 -->
+                  <line x1="120" y1="22" x2="182" y2="70" class="ramsey-edge ramsey-edge--blue"/>
+                  <line x1="182" y1="70" x2="158" y2="145" class="ramsey-edge ramsey-edge--blue"/>
+                  <line x1="158" y1="145" x2="82"  y2="145" class="ramsey-edge ramsey-edge--blue"/>
+                  <line x1="82"  y1="145" x2="58"  y2="70"  class="ramsey-edge ramsey-edge--blue"/>
+                  <line x1="58"  y1="70"  x2="120" y2="22"  class="ramsey-edge ramsey-edge--blue"/>
+                  <!-- Red edges: inner pentagram 0-2, 0-3, 1-3, 1-4, 2-4 -->
+                  <line x1="120" y1="22"  x2="158" y2="145" class="ramsey-edge ramsey-edge--red"/>
+                  <line x1="120" y1="22"  x2="82"  y2="145" class="ramsey-edge ramsey-edge--red"/>
+                  <line x1="182" y1="70"  x2="82"  y2="145" class="ramsey-edge ramsey-edge--red"/>
+                  <line x1="182" y1="70"  x2="58"  y2="70"  class="ramsey-edge ramsey-edge--red"/>
+                  <line x1="158" y1="145" x2="58"  y2="70"  class="ramsey-edge ramsey-edge--red"/>
+                  <!-- Nodes -->
+                  <circle cx="120" cy="22"  r="5" class="ramsey-node"/>
+                  <circle cx="182" cy="70"  r="5" class="ramsey-node"/>
+                  <circle cx="158" cy="145" r="5" class="ramsey-node"/>
+                  <circle cx="82"  cy="145" r="5" class="ramsey-node"/>
+                  <circle cx="58"  cy="70"  r="5" class="ramsey-node"/>
+                </svg>
+                <span class="ramsey-formula">R(3,3) = 6</span>
               </div>
             </div>
             <div class="project-info">
@@ -106,6 +125,39 @@
               <h3>Wordle Solver</h3>
               <p>An optimal Wordle solver using information theory — each guess is chosen to maximise expected information gain, consistently solving the puzzle in under 4 guesses.</p>
               <span class="project-link-label">Try it <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </a>
+
+          <a href="https://lachy-dauth.github.io/Coding-Challenges/" target="_blank" class="project-card">
+            <div class="project-img-wrap project-img-wrap--challenges">
+              <div class="challenges-preview">
+                <div class="challenges-preview-row">
+                  <span class="ch-num">01</span>
+                  <span class="ch-name">Tic Tac Toe</span>
+                  <span class="ch-tag">Game · AI</span>
+                </div>
+                <div class="challenges-preview-row">
+                  <span class="ch-num">02</span>
+                  <span class="ch-name">Boids</span>
+                  <span class="ch-tag">Simulation</span>
+                </div>
+                <div class="challenges-preview-row">
+                  <span class="ch-num">03</span>
+                  <span class="ch-name">Turing Machine</span>
+                  <span class="ch-tag">Theory</span>
+                </div>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">Algorithms</span>
+                <span class="tag">Simulations</span>
+                <span class="tag">Theory</span>
+              </div>
+              <h3>Coding Challenges</h3>
+              <p>A collection of self-contained interactive projects — minimax Tic Tac Toe AI, Reynolds' Boids flocking simulation, and a Turing Machine simulator with a plain-text rule format, breakpoints, and an automated test suite.</p>
+              <span class="project-link-label">Explore <i class="fas fa-arrow-right"></i></span>
             </div>
           </a>
 

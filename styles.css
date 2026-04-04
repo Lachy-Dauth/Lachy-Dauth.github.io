@@ -337,41 +337,108 @@ a.project-card:hover .project-img { transform: scale(1.03); }
 }
 a.project-card:hover .project-link-label { gap: 0.65rem; }
 
-/* paper placeholder card */
-.project-img-wrap--paper {
+/* ramsey graph preview */
+.project-img-wrap--ramsey {
   aspect-ratio: 16/9;
-  background: linear-gradient(135deg, #1c2128 0%, #0d1117 100%);
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, #111820 0%, #0d1117 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid var(--border);
+  overflow: hidden;
 }
 
-.paper-preview {
+.ramsey-preview {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  padding: 1.5rem;
-  text-align: center;
+  gap: 0.6rem;
 }
 
-.paper-icon {
-  font-size: 2.5rem;
-  color: var(--accent-dim);
-  opacity: 0.7;
+.ramsey-graph {
+  width: 180px;
+  height: auto;
+  transition: filter 0.3s ease;
+  filter: drop-shadow(0 0 6px rgba(224, 90, 107, 0.12)) drop-shadow(0 0 6px rgba(88, 166, 255, 0.1));
 }
 
-.paper-title {
-  font-size: 0.95rem;
+.ramsey-edge {
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  transition: opacity 0.3s ease;
+}
+.ramsey-edge--blue { stroke: #58a6ff; opacity: 0.65; }
+.ramsey-edge--red  { stroke: #e05a6b; opacity: 0.65; }
+
+.ramsey-node {
+  fill: #0d1117;
+  stroke: #8b949e;
+  stroke-width: 1.5;
+  transition: stroke 0.3s ease;
+}
+
+.ramsey-formula {
+  font-family: var(--mono);
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-muted);
-  max-width: 200px;
-  letter-spacing: -0.01em;
-  line-height: 1.4;
+  letter-spacing: 0.06em;
+  transition: color 0.3s ease;
 }
 
-a.project-card:hover .paper-preview .paper-icon { opacity: 1; color: var(--accent); }
+div.project-card:hover .ramsey-graph {
+  filter: drop-shadow(0 0 10px rgba(224, 90, 107, 0.28)) drop-shadow(0 0 10px rgba(88, 166, 255, 0.2));
+}
+div.project-card:hover .ramsey-edge--blue { opacity: 0.9; }
+div.project-card:hover .ramsey-edge--red  { opacity: 0.9; }
+div.project-card:hover .ramsey-node { stroke: #c9d1d9; }
+div.project-card:hover .ramsey-formula { color: var(--text); }
+
+/* coding challenges preview */
+.project-img-wrap--challenges {
+  aspect-ratio: 16/9;
+  background: #09090f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+}
+
+.challenges-preview {
+  width: 88%;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+
+.challenges-preview-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.28rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.35);
+  transition: color 0.2s;
+}
+
+.challenges-preview-row:last-child { border-bottom: none; }
+
+.ch-num { color: rgba(255,255,255,0.15); min-width: 1.2rem; }
+.ch-name { color: rgba(226,221,212,0.55); flex: 1; letter-spacing: -0.01em; }
+.ch-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(184,244,66,0.4);
+  border: 1px solid rgba(184,244,66,0.2);
+  padding: 0.1rem 0.4rem;
+  border-radius: 100px;
+}
+
+a.project-card:hover .challenges-preview-row { color: rgba(255,255,255,0.6); }
+a.project-card:hover .ch-name { color: rgba(226,221,212,0.9); }
+a.project-card:hover .ch-tag { color: rgba(184,244,66,0.8); border-color: rgba(184,244,66,0.4); }
 
 /* research card action buttons */
 .project-actions {
