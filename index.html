@@ -96,6 +96,23 @@
             </div>
           </div>
 
+          <a href="https://lachy-dauth.github.io/Coding-Challenges/" target="_blank" class="project-card" id="challenges-card">
+            <div class="project-img-wrap project-img-wrap--challenges">
+              <div class="challenges-preview" id="challenges-preview"></div>
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">Algorithms</span>
+                <span class="tag">Simulations</span>
+                <span class="tag">Theory</span>
+              </div>
+              <h3>Coding Challenges</h3>
+              <p id="challenges-desc">A collection of self-contained interactive projects.</p>
+              <span class="project-link-label">Explore <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </a>
+
           <a href="https://lachy-dauth.github.io/chess-engine/" target="_blank" class="project-card">
             <div class="project-img-wrap">
               <img src="./images/Chess-engine.png" alt="JS Chess Engine" class="project-img">
@@ -127,69 +144,6 @@
               <span class="project-link-label">Try it <i class="fas fa-arrow-right"></i></span>
             </div>
           </a>
-
-          <a href="https://lachy-dauth.github.io/Coding-Challenges/" target="_blank" class="project-card">
-            <div class="project-img-wrap project-img-wrap--challenges">
-              <div class="challenges-preview">
-                <div class="challenges-preview-row">
-                  <span class="ch-num">01</span>
-                  <span class="ch-name">Tic Tac Toe</span>
-                  <span class="ch-tag">Game · AI</span>
-                </div>
-                <div class="challenges-preview-row">
-                  <span class="ch-num">02</span>
-                  <span class="ch-name">Boids</span>
-                  <span class="ch-tag">Simulation</span>
-                </div>
-                <div class="challenges-preview-row">
-                  <span class="ch-num">03</span>
-                  <span class="ch-name">Turing Machine</span>
-                  <span class="ch-tag">Theory</span>
-                </div>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag">JavaScript</span>
-                <span class="tag">Algorithms</span>
-                <span class="tag">Simulations</span>
-                <span class="tag">Theory</span>
-              </div>
-              <h3>Coding Challenges</h3>
-              <p>A collection of self-contained interactive projects — minimax Tic Tac Toe AI, Reynolds' Boids flocking simulation, and a Turing Machine simulator with a plain-text rule format, breakpoints, and an automated test suite.</p>
-              <span class="project-link-label">Explore <i class="fas fa-arrow-right"></i></span>
-            </div>
-          </a>
-
-          <div class="project-card project-card--video">
-            <div class="project-video-wrap">
-              <iframe src="https://www.youtube.com/embed/qaag9lN3sv8" title="AI learns to play snake" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag">Python</span>
-                <span class="tag">Genetic Algorithm</span>
-                <span class="tag">Neural Networks</span>
-              </div>
-              <h3>AI Learns to Play Snake</h3>
-              <p>A neural network trained with a genetic algorithm to play Snake. Agents evolve across generations, with natural selection favouring higher-scoring individuals.</p>
-            </div>
-          </div>
-
-          <div class="project-card project-card--video">
-            <div class="project-video-wrap">
-              <iframe src="https://www.youtube.com/embed/ZNLYiP7lYWw" title="AI learns to Drive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag">Python</span>
-                <span class="tag">Deep Learning</span>
-                <span class="tag">Evolutionary AI</span>
-              </div>
-              <h3>AI Learns to Drive</h3>
-              <p>Cars guided by neural networks learn to navigate a race track through evolutionary training. Raycasting sensors feed into the network; fitter agents reproduce each generation.</p>
-            </div>
-          </div>
 
           <div class="project-card project-card--video">
             <div class="project-video-wrap">
@@ -436,5 +390,28 @@
       </div>
     </section>
   </main>
+
+  <script>
+    fetch('https://lachy-dauth.github.io/Coding-Challenges/challenges.json')
+      .then(r => r.json())
+      .then(items => {
+        const featured = items.filter(item => item.featured);
+        const preview = document.getElementById('challenges-preview');
+        featured.forEach((item, i) => {
+          const row = document.createElement('div');
+          row.className = 'challenges-preview-row';
+          row.innerHTML = `
+            <span class="ch-num">${String(i + 1).padStart(2, '0')}</span>
+            <span class="ch-name">${item.title}</span>
+            <span class="ch-tag">${item.tag}</span>
+          `;
+          preview.appendChild(row);
+        });
+
+        const descs = featured.map(item => item.title).join(', ');
+        document.getElementById('challenges-desc').textContent =
+          `A collection of ${items.length} self-contained interactive projects including ${descs}.`;
+      });
+  </script>
 </body>
 </html>
