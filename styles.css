@@ -309,12 +309,22 @@ a.project-card:hover .project-img { transform: scale(1.03); }
   border: 1px solid rgba(190, 49, 68, 0.25);
 }
 
+.project-date {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
 .project-info h3 {
   font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--text);
-  margin-top: 0.25rem;
+  margin-top: 0.1rem;
 }
 
 .project-info p {
