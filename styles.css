@@ -404,6 +404,54 @@ div.project-card:hover .ramsey-edge--red  { opacity: 0.9; }
 div.project-card:hover .ramsey-node { stroke: #c9d1d9; }
 div.project-card:hover .ramsey-formula { color: var(--text); }
 
+/* megagem preview */
+.project-img-wrap--megagem {
+  aspect-ratio: 16/9;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, #141a23 0%, #0d1117 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.megagem-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.megagem-gems {
+  width: 220px;
+  height: auto;
+  filter: drop-shadow(0 0 6px rgba(155, 89, 182, 0.18))
+          drop-shadow(0 0 6px rgba(74, 144, 226, 0.14));
+  transition: filter 0.3s ease, transform 0.4s ease;
+}
+
+.megagem-gem {
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 1.2;
+  transition: transform 0.4s ease;
+  transform-origin: center;
+}
+
+.megagem-formula {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  transition: color 0.3s ease;
+}
+
+a.project-card:hover .megagem-gems {
+  filter: drop-shadow(0 0 12px rgba(236, 72, 153, 0.32))
+          drop-shadow(0 0 12px rgba(74, 144, 226, 0.22));
+}
+a.project-card:hover .megagem-formula { color: var(--text); }
+
 /* coding challenges preview */
 .project-img-wrap--challenges {
   aspect-ratio: 16/9;
