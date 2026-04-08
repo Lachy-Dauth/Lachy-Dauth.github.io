@@ -498,6 +498,91 @@ a.project-card:hover .challenges-preview-row { color: rgba(255,255,255,0.6); }
 a.project-card:hover .ch-name { color: rgba(226,221,212,0.9); }
 a.project-card:hover .ch-tag { color: rgba(184,244,66,0.8); border-color: rgba(184,244,66,0.4); }
 
+/* directly-featured challenge preview */
+.project-img-wrap--featured-challenge {
+  aspect-ratio: 16/9;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, #131a23 0%, #0d1117 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+}
+
+.project-img-wrap--featured-challenge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.featured-challenge-preview {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.fc-label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(184,244,66,0.45);
+  border: 1px solid rgba(184,244,66,0.25);
+  padding: 0.18rem 0.6rem;
+  border-radius: 100px;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.fc-tag-big {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  transition: color 0.3s ease;
+}
+
+a.project-card:hover .fc-label {
+  color: rgba(184,244,66,0.85);
+  border-color: rgba(184,244,66,0.45);
+}
+a.project-card:hover .fc-tag-big {
+  color: var(--text);
+}
+
+.fc-parent {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(184,244,66,0.55);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.15rem;
+  transition: color 0.25s ease;
+}
+
+.fc-parent i {
+  font-size: 0.65rem;
+  opacity: 0.85;
+}
+
+a.project-card:hover .fc-parent {
+  color: rgba(184,244,66,0.9);
+}
+
 /* research card action buttons */
 .project-actions {
   display: flex;

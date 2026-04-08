@@ -448,10 +448,59 @@
   </main>
 
   <script>
-    fetch('https://lachy-dauth.github.io/Coding-Challenges/challenges.json')
+    fetch('../Coding-Challenges/challenges.json')
       .then(r => r.json())
       .then(items => {
-        const featured = items.filter(item => item.featured);
+        const baseUrl = 'https://lachy-dauth.github.io/Coding-Challenges/';
+        const resolveHref = item => {
+          const raw = item.href || (item.links && item.links[0] && item.links[0].href);
+          return raw ? new URL(raw, baseUrl).toString() : baseUrl;
+        };
+
+        // Inject directly-featured challenges as their own project cards,
+        // placed immediately after the main Coding Challenges card.
+        const challengesCard = document.getElementById('challenges-card');
+        let insertAfter = challengesCard;
+        items.filter(item => item.directlyFeatured).forEach(item => {
+          const card = document.createElement('a');
+          card.className = 'project-card';
+          card.href = resolveHref(item);
+          card.target = '_blank';
+
+          const chips = (item.chips || []).slice(0, 4);
+          const tagsHtml = chips.map(() => '<span class="tag"></span>').join('');
+
+          card.innerHTML = `
+            <div class="project-img-wrap project-img-wrap--featured-challenge">
+              <div class="featured-challenge-preview">
+                <span class="fc-label"></span>
+                <span class="fc-tag-big"></span>
+              </div>
+            </div>
+            <div class="project-info">
+              <span class="fc-parent"><i class="fas fa-code-branch"></i> Part of Coding Challenges</span>
+              <div class="project-tags">${tagsHtml}</div>
+              <span class="project-date"></span>
+              <h3></h3>
+              <p></p>
+              <span class="project-link-label">Try it <i class="fas fa-arrow-right"></i></span>
+            </div>
+          `;
+
+          card.querySelector('.fc-label').textContent = item.title || '';
+          card.querySelector('.fc-tag-big').textContent = item.tag || '';
+          card.querySelector('.project-date').textContent = item.date || '';
+          card.querySelector('h3').textContent = item.title || '';
+          card.querySelector('p').textContent = item.desc || '';
+          const tagSpans = card.querySelectorAll('.project-tags .tag');
+          chips.forEach((c, i) => { tagSpans[i].textContent = c; });
+
+          insertAfter.parentNode.insertBefore(card, insertAfter.nextSibling);
+          insertAfter = card;
+        });
+
+        // Featured preview list (excluding directly-featured to avoid duplication)
+        const featured = items.filter(item => item.featured && !item.directlyFeatured);
         const preview = document.getElementById('challenges-preview');
         featured.forEach((item, i) => {
           const row = document.createElement('div');
@@ -464,7 +513,12 @@
           preview.appendChild(row);
         });
 
-        const tenEntries = featured.concat(items.filter(item => !item.featured).slice(0, Math.max(0, 10 - featured.length)));
+        // Description includes all highlighted entries (featured + directly-featured)
+        const allFeatured = items.filter(item => item.featured || item.directlyFeatured);
+        const tenEntries = allFeatured.concat(
+          items.filter(item => !item.featured && !item.directlyFeatured)
+            .slice(0, Math.max(0, 10 - allFeatured.length))
+        );
 
         const descs = tenEntries.map(item => item.title).join(', ');
         document.getElementById('challenges-desc').textContent =
