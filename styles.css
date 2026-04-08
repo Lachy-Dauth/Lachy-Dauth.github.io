@@ -452,6 +452,92 @@ a.project-card:hover .megagem-gems {
 }
 a.project-card:hover .megagem-formula { color: var(--text); }
 
+/* stableford preview */
+.project-img-wrap--golf {
+  aspect-ratio: 16/9;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, #0f1a12 0%, #0d1117 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.golf-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  width: 82%;
+}
+
+.golf-leaderboard {
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  border: 1px solid rgba(122, 201, 122, 0.18);
+  border-radius: 6px;
+  padding: 0.25rem 0.55rem;
+  background: rgba(15, 26, 18, 0.6);
+  transition: border-color 0.3s ease;
+}
+
+.golf-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.22rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: rgba(226, 221, 212, 0.55);
+  transition: color 0.25s ease;
+}
+
+.golf-row:last-child { border-bottom: none; }
+
+.golf-row--head {
+  color: rgba(122, 201, 122, 0.55);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+}
+
+.golf-row--leader .golf-pos,
+.golf-row--leader .golf-name,
+.golf-row--leader .golf-pts {
+  color: rgba(184, 244, 66, 0.85);
+}
+
+.golf-pos {
+  min-width: 1rem;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.golf-name {
+  flex: 1;
+  letter-spacing: -0.01em;
+}
+
+.golf-pts {
+  font-weight: 700;
+  color: rgba(226, 221, 212, 0.75);
+}
+
+.golf-formula {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  transition: color 0.3s ease;
+}
+
+a.project-card:hover .golf-leaderboard { border-color: rgba(184, 244, 66, 0.35); }
+a.project-card:hover .golf-row { color: rgba(226, 221, 212, 0.85); }
+a.project-card:hover .golf-row--head { color: rgba(122, 201, 122, 0.9); }
+a.project-card:hover .golf-row--leader .golf-pos,
+a.project-card:hover .golf-row--leader .golf-name,
+a.project-card:hover .golf-row--leader .golf-pts { color: rgba(184, 244, 66, 1); }
+a.project-card:hover .golf-formula { color: var(--text); }
+
 /* coding challenges preview */
 .project-img-wrap--challenges {
   aspect-ratio: 16/9;
