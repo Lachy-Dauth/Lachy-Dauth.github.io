@@ -464,7 +464,9 @@
           preview.appendChild(row);
         });
 
-        const descs = featured.map(item => item.title).join(', ');
+        const tenEntries = featured.concat(items.filter(item => !item.featured).slice(0, Math.max(0, 10 - featured.length)));
+
+        const descs = tenEntries.map(item => item.title).join(', ');
         document.getElementById('challenges-desc').textContent =
           `A collection of ${items.length} self-contained interactive projects including ${descs}.`;
       });
