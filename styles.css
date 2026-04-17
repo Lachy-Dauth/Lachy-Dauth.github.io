@@ -538,6 +538,75 @@ a.project-card:hover .golf-row--leader .golf-name,
 a.project-card:hover .golf-row--leader .golf-pts { color: rgba(184, 244, 66, 1); }
 a.project-card:hover .golf-formula { color: var(--text); }
 
+/* prosperity visualizer preview */
+.project-img-wrap--prosperity {
+  aspect-ratio: 16/9;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, #0f1620 0%, #0d1117 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.prosperity-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  width: 82%;
+}
+
+.prosperity-chart {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 6px rgba(88, 166, 255, 0.14));
+  transition: filter 0.3s ease;
+}
+
+.pv-grid {
+  stroke: rgba(255, 255, 255, 0.04);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+
+.pv-zero {
+  stroke: rgba(139, 148, 158, 0.25);
+  stroke-width: 1;
+  stroke-dasharray: 3 2;
+}
+
+.pv-line {
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity 0.3s ease, stroke-width 0.3s ease;
+}
+
+.pv-line--a { stroke: #58a6ff; opacity: 0.9; }
+.pv-line--b { stroke: #b377cc; opacity: 0.55; }
+.pv-line--c { stroke: #e05a6b; opacity: 0.55; }
+
+.pv-area { transition: opacity 0.3s ease; opacity: 0.85; }
+
+.prosperity-formula {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  transition: color 0.3s ease;
+}
+
+a.project-card:hover .prosperity-chart {
+  filter: drop-shadow(0 0 12px rgba(88, 166, 255, 0.3));
+}
+a.project-card:hover .pv-line--a { stroke-width: 2.1; }
+a.project-card:hover .pv-line--b { opacity: 0.85; }
+a.project-card:hover .pv-line--c { opacity: 0.75; }
+a.project-card:hover .prosperity-formula { color: var(--text); }
+
 /* coding challenges preview */
 .project-img-wrap--challenges {
   aspect-ratio: 16/9;
