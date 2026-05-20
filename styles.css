@@ -538,6 +538,87 @@ a.project-card:hover .golf-row--leader .golf-name,
 a.project-card:hover .golf-row--leader .golf-pts { color: rgba(184, 244, 66, 1); }
 a.project-card:hover .golf-formula { color: var(--text); }
 
+/* bilingual book preview */
+.project-img-wrap--bilingual {
+  aspect-ratio: 16/9;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, #1a1612 0%, #0d1117 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.bilingual-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  width: 80%;
+}
+
+.bilingual-pages {
+  display: flex;
+  width: 100%;
+  background: rgba(255, 234, 203, 0.05);
+  border: 1px solid rgba(255, 234, 203, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.bilingual-page {
+  flex: 1;
+  padding: 0.55rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.bilingual-page + .bilingual-page {
+  border-left: 1px solid rgba(255, 234, 203, 0.2);
+}
+
+.bl-lang {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(255, 234, 203, 0.5);
+  margin-bottom: 0.15rem;
+  transition: color 0.3s ease;
+}
+
+.bl-line {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 234, 203, 0.32);
+  transition: background 0.3s ease;
+}
+
+.bl-line--full { width: 100%; }
+.bl-line--med { width: 75%; }
+.bl-line--short { width: 50%; }
+
+.bilingual-formula {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  transition: color 0.3s ease;
+}
+
+a.project-card:hover .bilingual-pages {
+  border-color: rgba(255, 234, 203, 0.45);
+  background: rgba(255, 234, 203, 0.08);
+}
+
+a.project-card:hover .bl-line { background: rgba(255, 234, 203, 0.6); }
+a.project-card:hover .bl-lang { color: rgba(255, 234, 203, 0.8); }
+a.project-card:hover .bilingual-formula { color: var(--text); }
+
 /* prosperity visualizer preview */
 .project-img-wrap--prosperity {
   aspect-ratio: 16/9;
