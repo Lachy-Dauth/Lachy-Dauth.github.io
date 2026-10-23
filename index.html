@@ -55,6 +55,60 @@
             <div class="project-img-wrap project-img-wrap--ramsey">
               <div class="ramsey-preview">
                 <svg class="ramsey-graph" viewBox="0 0 240 172" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <!-- Green edges: spokes from the centre vertex to the pentagon -->
+                  <line x1="120" y1="89" x2="120" y2="22"  class="ramsey-edge ramsey-edge--green"/>
+                  <line x1="120" y1="89" x2="182" y2="70"  class="ramsey-edge ramsey-edge--green"/>
+                  <line x1="120" y1="89" x2="158" y2="145" class="ramsey-edge ramsey-edge--green"/>
+                  <line x1="120" y1="89" x2="82"  y2="145" class="ramsey-edge ramsey-edge--green"/>
+                  <line x1="120" y1="89" x2="58"  y2="70"  class="ramsey-edge ramsey-edge--green"/>
+                  <!-- Blue edges: outer pentagon 0-1, 1-2, 2-3, 3-4, 4-0 -->
+                  <line x1="120" y1="22" x2="182" y2="70" class="ramsey-edge ramsey-edge--blue"/>
+                  <line x1="182" y1="70" x2="158" y2="145" class="ramsey-edge ramsey-edge--blue"/>
+                  <line x1="158" y1="145" x2="82"  y2="145" class="ramsey-edge ramsey-edge--blue"/>
+                  <line x1="82"  y1="145" x2="58"  y2="70"  class="ramsey-edge ramsey-edge--blue"/>
+                  <line x1="58"  y1="70"  x2="120" y2="22"  class="ramsey-edge ramsey-edge--blue"/>
+                  <!-- Red edges: inner pentagram 0-2, 0-3, 1-3, 1-4, 2-4 -->
+                  <line x1="120" y1="22"  x2="158" y2="145" class="ramsey-edge ramsey-edge--red"/>
+                  <line x1="120" y1="22"  x2="82"  y2="145" class="ramsey-edge ramsey-edge--red"/>
+                  <line x1="182" y1="70"  x2="82"  y2="145" class="ramsey-edge ramsey-edge--red"/>
+                  <line x1="182" y1="70"  x2="58"  y2="70"  class="ramsey-edge ramsey-edge--red"/>
+                  <line x1="158" y1="145" x2="58"  y2="70"  class="ramsey-edge ramsey-edge--red"/>
+                  <!-- Nodes -->
+                  <circle cx="120" cy="22"  r="5" class="ramsey-node"/>
+                  <circle cx="182" cy="70"  r="5" class="ramsey-node"/>
+                  <circle cx="158" cy="145" r="5" class="ramsey-node"/>
+                  <circle cx="82"  cy="145" r="5" class="ramsey-node"/>
+                  <circle cx="58"  cy="70"  r="5" class="ramsey-node"/>
+                  <circle cx="120" cy="89"  r="5" class="ramsey-node"/>
+                </svg>
+                <span class="ramsey-formula">R(4,4,4) ≤ 198</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-tags">
+                <span class="tag">Research</span>
+                <span class="tag">Combinatorics</span>
+                <span class="tag">Flag Algebras</span>
+                <span class="tag">Python</span>
+              </div>
+              <span class="project-date">Oct 2026</span>
+              <h3>Ramsey Numbers Research 2.0</h3>
+              <p>Two preprints with new bounds for small Ramsey numbers, including R(4,4,4) ≤ 198 (previously 229), R(3,4,4) ≤ 73 (previously 77), R(4,21) ≥ 260 and R(4,24) ≥ 370. The main new tool is a flag-algebra certificate with local caps on colour neighbourhoods. Every computer-assisted claim ships with certificates re-checked in exact arithmetic by independent verifiers.</p>
+              <div class="project-actions">
+                <a href="https://github.com/Lachy-Dauth/ramsey-neighbourhood-counting" target="_blank" class="project-action-btn">
+                  <i class="fab fa-github"></i> GitHub
+                </a>
+                <span class="project-action-btn project-action-btn--pending">
+                  <i class="fas fa-hourglass-half"></i> arXiv coming soon
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-img-wrap project-img-wrap--ramsey">
+              <div class="ramsey-preview">
+                <svg class="ramsey-graph" viewBox="0 0 240 172" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <!-- Blue edges: outer pentagon 0-1, 1-2, 2-3, 3-4, 4-0 -->
                   <line x1="120" y1="22" x2="182" y2="70" class="ramsey-edge ramsey-edge--blue"/>
                   <line x1="182" y1="70" x2="158" y2="145" class="ramsey-edge ramsey-edge--blue"/>
@@ -97,94 +151,6 @@
               </div>
             </div>
           </div>
-
-          <a href="https://bilingual-books.up.railway.app/" target="_blank" class="project-card">
-            <div class="project-img-wrap project-img-wrap--bilingual">
-              <div class="bilingual-preview">
-                <div class="bilingual-pages">
-                  <div class="bilingual-page">
-                    <span class="bl-lang">EN</span>
-                    <span class="bl-line bl-line--full"></span>
-                    <span class="bl-line bl-line--full"></span>
-                    <span class="bl-line bl-line--med"></span>
-                    <span class="bl-line bl-line--full"></span>
-                    <span class="bl-line bl-line--short"></span>
-                  </div>
-                  <div class="bilingual-page">
-                    <span class="bl-lang">FR</span>
-                    <span class="bl-line bl-line--full"></span>
-                    <span class="bl-line bl-line--med"></span>
-                    <span class="bl-line bl-line--full"></span>
-                    <span class="bl-line bl-line--full"></span>
-                    <span class="bl-line bl-line--short"></span>
-                  </div>
-                </div>
-                <span class="bilingual-formula">EN &harr; FR &middot; side-by-side</span>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag">JavaScript</span>
-                <span class="tag">EPUB</span>
-                <span class="tag">Translation</span>
-                <span class="tag">JSZip</span>
-              </div>
-              <span class="project-date">May 2026</span>
-              <h3>Bilingual Book Generator</h3>
-              <p>A browser-based tool that produces side-by-side bilingual editions of any text. Paste a passage or upload an existing EPUB, pick source and target languages, and download a clean bilingual EPUB or HTML — chapters, headings, and cover art preserved. Runs entirely client-side.</p>
-              <span class="project-link-label">Try it <i class="fas fa-arrow-right"></i></span>
-            </div>
-          </a>
-
-          <a href="https://mega-gem-production.up.railway.app/" target="_blank" class="project-card">
-            <div class="project-img-wrap project-img-wrap--megagem">
-              <div class="megagem-preview">
-                <svg class="megagem-gems" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="mg-blue" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="#6aabec"/>
-                      <stop offset="100%" stop-color="#4a90e2"/>
-                    </linearGradient>
-                    <linearGradient id="mg-green" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="#7ac97a"/>
-                      <stop offset="100%" stop-color="#5cb85c"/>
-                    </linearGradient>
-                    <linearGradient id="mg-pink" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="#f06ab2"/>
-                      <stop offset="100%" stop-color="#ec4899"/>
-                    </linearGradient>
-                    <linearGradient id="mg-purple" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="#b377cc"/>
-                      <stop offset="100%" stop-color="#9b59b6"/>
-                    </linearGradient>
-                    <linearGradient id="mg-yellow" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="#ffd771"/>
-                      <stop offset="100%" stop-color="#f6c343"/>
-                    </linearGradient>
-                  </defs>
-                  <!-- Five gems as rounded diamonds -->
-                  <polygon class="megagem-gem" points="24,12 40,40 24,68 8,40" fill="url(#mg-blue)"/>
-                  <polygon class="megagem-gem" points="72,12 88,40 72,68 56,40" fill="url(#mg-green)"/>
-                  <polygon class="megagem-gem" points="120,12 136,40 120,68 104,40" fill="url(#mg-pink)"/>
-                  <polygon class="megagem-gem" points="168,12 184,40 168,68 152,40" fill="url(#mg-purple)"/>
-                  <polygon class="megagem-gem" points="216,12 232,40 216,68 200,40" fill="url(#mg-yellow)"/>
-                </svg>
-                <span class="megagem-formula">bid = clamp(b + Σ wᵢ·xᵢ, 0, 1)</span>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag">Python</span>
-                <span class="tag">FastAPI</span>
-                <span class="tag">WebSockets</span>
-                <span class="tag">Genetic Algorithms</span>
-              </div>
-              <span class="project-date">Apr 2026</span>
-              <h3>MegaGem</h3>
-              <p>A full-stack MegaGem auction card game with a Python game engine, FastAPI + WebSocket multiplayer server, and a zoo of AI bots evolved via genetic algorithms. Play against AI or create lobbies to play with friends in real-time. Deployed on Railway.</p>
-              <span class="project-link-label">Play it <i class="fas fa-arrow-right"></i></span>
-            </div>
-          </a>
 
           <a href="https://lachy-dauth.github.io/Coding-Challenges/" target="_blank" class="project-card" id="challenges-card">
             <div class="project-img-wrap project-img-wrap--challenges">
@@ -253,48 +219,6 @@
               <p>A fully functional 8-bit computer built from redstone logic gates in Minecraft, capable of running custom assembly programs — including Fibonacci and multiplication algorithms.</p>
             </div>
           </div>
-
-          <a href="https://stableford.up.railway.app/" target="_blank" class="project-card">
-            <div class="project-img-wrap project-img-wrap--golf">
-              <div class="golf-preview">
-                <div class="golf-leaderboard">
-                  <div class="golf-row golf-row--head">
-                    <span class="golf-pos">#</span>
-                    <span class="golf-name">PLAYER</span>
-                    <span class="golf-pts">PTS</span>
-                  </div>
-                  <div class="golf-row golf-row--leader">
-                    <span class="golf-pos">1</span>
-                    <span class="golf-name">Dad</span>
-                    <span class="golf-pts">34</span>
-                  </div>
-                  <div class="golf-row">
-                    <span class="golf-pos">2</span>
-                    <span class="golf-name">Lachlan</span>
-                    <span class="golf-pts">31</span>
-                  </div>
-                  <div class="golf-row">
-                    <span class="golf-pos">3</span>
-                    <span class="golf-name">Sam</span>
-                    <span class="golf-pts">28</span>
-                  </div>
-                </div>
-                <span class="golf-formula">Stableford · Live</span>
-              </div>
-            </div>
-            <div class="project-info">
-              <div class="project-tags">
-                <span class="tag">TypeScript</span>
-                <span class="tag">React</span>
-                <span class="tag">WebSockets</span>
-                <span class="tag">Fastify</span>
-              </div>
-              <span class="project-date">Apr 2026</span>
-              <h3>Stableford</h3>
-              <p>A real-time, multi-player Stableford scoring app for casual golf rounds. Players join from their phones, enter scores hole-by-hole, and watch the leaderboard update live over WebSockets. React + Vite + TypeScript frontend, Fastify backend, SQLite, deployed on Railway.</p>
-              <span class="project-link-label">Try it <i class="fas fa-arrow-right"></i></span>
-            </div>
-          </a>
 
           <a href="https://lachy-dauth.github.io/Prosperity-Visualizer/" target="_blank" class="project-card">
             <div class="project-img-wrap project-img-wrap--prosperity">
@@ -497,20 +421,6 @@
                 <span class="award-name">AMO Bronze</span>
                 <span class="award-detail">Australian Mathematics Olympiad · 2024</span>
               </div>
-            </div>
-
-            <!-- SKILLS -->
-            <h3 class="resume-section-label" style="margin-top: 3rem;"><i class="fas fa-code"></i> Skills</h3>
-            <div class="skills-list">
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">C</span>
-              <span class="skill-tag">C#</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">TypeScript</span>
-              <span class="skill-tag">Vue</span>
-              <span class="skill-tag">Django</span>
-              <span class="skill-tag">NumPy</span>
-              <span class="skill-tag">Git</span>
             </div>
 
           </div>
