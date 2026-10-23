@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lachlan Dauth</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Source+Sans+3:wght@400;600&display=swap">
+  <style>
+    /* Layout: sticky intro column on the left, CV-style entries on the right with a date column */
+    :root {
+      --bg: #fafafb;
+      --fg: #1c1d21;
+      --muted: #63666e;
+      --line: #e3e4e8;
+      --accent: #0e6b62;
+      --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+      --sans: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #16181b; --fg: #e6e7ea; --muted: #989ca4; --line: #2a2d31; --accent: #6fcfc2;
+        color-scheme: dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #16181b; --fg: #e6e7ea; --muted: #989ca4; --line: #2a2d31; --accent: #6fcfc2;
+      color-scheme: dark;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 400 1.0625rem/1.6 var(--sans); }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+    .layout {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-block: 4.5rem 6rem;
+      padding-left: max(24px, env(safe-area-inset-left, 0px));
+      padding-right: max(24px, env(safe-area-inset-right, 0px));
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* intro column */
+    .intro { position: sticky; top: calc(4.5rem + env(safe-area-inset-top, 0px)); display: grid; gap: 1.5rem; }
+    h1 { margin: 0; font: 600 2.1rem/1.15 var(--serif); letter-spacing: -0.01em; }
+    .role { margin: 0.4rem 0 0; color: var(--muted); }
+    .bio { margin: 0; color: var(--muted); font-size: 1rem; }
+    .nav { display: grid; gap: 0.35rem; margin: 0; padding: 0; list-style: none; font-size: 0.95rem; }
+    .nav a { color: var(--muted); }
+    .nav a:hover { color: var(--fg); }
+    .contact { display: grid; gap: 0.35rem; margin: 0; padding: 1.25rem 0 0; list-style: none; border-top: 1px solid var(--line); font-size: 0.95rem; }
+    .email { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+    #addr { user-select: all; }
+    .copy {
+      font: 600 0.75rem/1 var(--sans);
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0.3rem 0.5rem;
+      cursor: pointer;
+    }
+    .copy:hover { color: var(--fg); border-color: var(--muted); }
+
+    /* main column */
+    main { display: grid; gap: 4rem; min-width: 0; }
+    section { display: grid; gap: 1.5rem; scroll-margin-top: 2rem; }
+    h2 { margin: 0; font: 600 1.35rem/1.3 var(--serif); }
+
+    .entries { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.75rem; }
+    .entry { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 1.5rem; }
+    .when { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 0.15rem; }
+    .what { display: grid; gap: 0.3rem; min-width: 0; }
+    .title { margin: 0; font-weight: 600; }
+    .title a { color: var(--fg); }
+    .title a:hover { color: var(--accent); }
+    .sub { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    .desc { margin: 0; color: var(--muted); max-width: 64ch; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.2rem 1.1rem; font-size: 0.95rem; }
+    .pending { color: var(--muted); }
+    .roles { list-style: none; margin: 0.15rem 0 0; padding: 0; display: grid; gap: 0.2rem; color: var(--muted); }
+    .roles li { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: 1rem; }
+    .roles span:last-child { font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+
+    table { width: 100%; max-width: 560px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    th, td { text-align: left; padding: 0.55rem 0; border-bottom: 1px solid var(--line); }
+    th { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+    td + td, th + th { text-align: right; }
+    tbody tr:last-child td { border-bottom: 0; }
+
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: minmax(0, 1fr); gap: 3.5rem; padding-block: 3.5rem 5rem; }
+      .intro { position: static; }
+      .nav { display: flex; flex-wrap: wrap; gap: 0.3rem 1.1rem; }
+    }
+    @media (max-width: 560px) {
+      .layout { padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+      h1 { font-size: 1.8rem; }
+      .entry { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
+      .when { padding-top: 0; }
+    }
+
+    /* option-switcher */
+    .opt {
+      position: fixed;
+      right: calc(12px + env(safe-area-inset-right, 0px));
+      bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+      padding: 0.25rem 0.35rem 0.25rem 0.6rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+    .opt a { padding: 0.15rem 0.45rem; border-radius: 4px; color: var(--muted); }
+    .opt a[aria-current] { color: var(--bg); background: var(--fg); }
+    .opt a:hover { text-decoration: none; color: var(--fg); }
+    .opt a[aria-current]:hover { color: var(--bg); }
+    /* /option-switcher */
+  </style>
+</head>
+<body>
+  <div class="layout">
+
+    <aside class="intro">
+      <div>
+        <h1>Lachlan Dauth</h1>
+        <p class="role">Computer Science, UNSW Sydney</p>
+      </div>
+      <p class="bio">
+        I study Computer Science at UNSW (WAM 91) and work on bounds for small Ramsey numbers.
+        After a quantitative trading internship at Jane Street in Hong Kong, I'm returning there from
+        December 2026 and joining as a graduate quantitative trader in 2027.
+      </p>
+      <ul class="nav" aria-label="Sections">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#awards">Awards</a></li>
+        <li><a href="#running">Running</a></li>
+      </ul>
+      <ul class="contact">
+        <li><a href="https://github.com/Lachy-Dauth" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/lachlan-dauth-9b3951235/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li class="email"><span id="addr">lachydauth@gmail.com</span><button type="button" class="copy" id="copy">Copy</button></li>
+      </ul>
+    </aside>
+
+    <main>
+
+      <section id="projects" aria-labelledby="h-projects">
+        <h2 id="h-projects">Projects</h2>
+        <ul class="entries">
+          <li class="entry">
+            <div class="when">Oct 2026</div>
+            <div class="what">
+              <p class="title">Ramsey Numbers Research 2.0</p>
+              <p class="desc">Two preprints with new bounds for small Ramsey numbers, including R(4,4,4) ≤ 198 (previously 229), R(3,4,4) ≤ 73 (previously 77), R(4,21) ≥ 260 and R(4,24) ≥ 370. The proofs use flag-algebra certificates, and every computer-assisted claim is re-checked in exact arithmetic.</p>
+              <div class="actions">
+                <a href="https://github.com/Lachy-Dauth/ramsey-neighbourhood-counting" target="_blank" rel="noopener">Code and certificates</a>
+                <span class="pending">arXiv coming soon</span>
+              </div>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">Oct 2025</div>
+            <div class="what">
+              <p class="title">Ramsey Numbers Research</p>
+              <p class="desc">A COMP3821 research project on computational bounds for Ramsey numbers. I disproved the Extension and Degree Difference conjectures with a counterexample search over McKay's graph database, and wrote a 3-colour Ramsey graph generator for lower bounds.</p>
+              <div class="actions">
+                <a href="https://lachy-dauth.github.io/COMP3821_Project.pdf" target="_blank" rel="noopener">Report (PDF)</a>
+                <a href="https://github.com/Lachy-Dauth/3821-Ramsey" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+          </li>
+          <li class="entry" id="cc">
+            <div class="when">2022 – now</div>
+            <div class="what">
+              <p class="title"><a href="https://lachy-dauth.github.io/Coding-Challenges/" target="_blank" rel="noopener">Coding Challenges</a></p>
+              <p class="desc" id="cc-desc">A collection of interactive projects that run in the browser.</p>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">Apr 2026</div>
+            <div class="what">
+              <p class="title"><a href="https://lachy-dauth.github.io/Prosperity-Visualizer/" target="_blank" rel="noopener">OpenProsperity Visualizer</a></p>
+              <p class="desc">A local-first dashboard for comparing backtest logs from IMC Prosperity 4, with synchronised PnL, order-book, position and fill views. Logs are parsed in the browser and never uploaded.</p>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">Mar 2023</div>
+            <div class="what">
+              <p class="title"><a href="https://lachy-dauth.github.io/chess-engine/" target="_blank" rel="noopener">JS Chess Engine</a></p>
+              <p class="desc">A chess engine written from scratch in JavaScript, with move generation, board evaluation and minimax search with alpha-beta pruning.</p>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">Jan 2023</div>
+            <div class="what">
+              <p class="title"><a href="https://www.youtube.com/watch?v=j0--xt6fRqE" target="_blank" rel="noopener">8-bit Minecraft Computer</a></p>
+              <p class="desc">A working 8-bit computer built from redstone logic gates, running custom assembly programs such as Fibonacci and multiplication. Video on YouTube.</p>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">Aug 2022</div>
+            <div class="what">
+              <p class="title"><a href="https://wordlesolver.github.io/" target="_blank" rel="noopener">Wordle Solver</a></p>
+              <p class="desc">Chooses each guess to maximise expected information gain, and consistently solves the puzzle in under four guesses.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section id="experience" aria-labelledby="h-experience">
+        <h2 id="h-experience">Experience</h2>
+        <ul class="entries">
+          <li class="entry">
+            <div class="when">2026 – 2027</div>
+            <div class="what">
+              <p class="title">Jane Street</p>
+              <p class="sub">Hong Kong</p>
+              <ul class="roles">
+                <li><span>Graduate Quantitative Trader</span><span>2027</span></li>
+                <li><span>Quantitative Trading Intern, returning</span><span>Dec 2026 – Feb 2027</span></li>
+                <li><span>Quantitative Trading Intern</span><span>Jun – Aug 2026</span></li>
+              </ul>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">Sep 2025</div>
+            <div class="what">
+              <p class="title">IMC Launchpad</p>
+              <p class="sub">Trader Stream · Sydney</p>
+              <p class="desc">1st place in the final trading competition.</p>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">Jan – Oct 2025</div>
+            <div class="what">
+              <p class="title">WiseTech Global</p>
+              <p class="sub">Associate Software Engineer · Sydney</p>
+              <p class="desc">Built and maintained ETL pipelines for the analytics team and rotated through the data science and front-end teams, at 90% of full-time hours alongside university.</p>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">Dec 2024 – Jan 2025</div>
+            <div class="what">
+              <p class="title"><a href="https://www.narwhaltutoring.com/" target="_blank" rel="noopener">Narwhal Tutoring</a></p>
+              <p class="sub">Web Developer · Perth</p>
+              <p class="desc">Improved the user experience and automated business processes for tutors and clients.</p>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">2024</div>
+            <div class="what">
+              <p class="title">3E Learning</p>
+              <p class="sub">Mathematics Tutor · Perth</p>
+              <p class="desc">Tutored years 6–8 students in mathematics and Python.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section id="education" aria-labelledby="h-education">
+        <h2 id="h-education">Education</h2>
+        <ul class="entries">
+          <li class="entry">
+            <div class="when">2025 – Aug 2027</div>
+            <div class="what">
+              <p class="title">UNSW Sydney</p>
+              <p class="sub">B.Sc. Computer Science</p>
+              <p class="desc">WAM 91 (High Distinction). Dean's List 2025.</p>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">Jan 2024</div>
+            <div class="what">
+              <p class="title">National Mathematics Summer School</p>
+              <p class="sub">Canberra</p>
+              <p class="desc">Selected for a two-week residential program in proof-based mathematics.</p>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">2017 – 2024</div>
+            <div class="what">
+              <p class="title">Scotch College</p>
+              <p class="sub">Perth</p>
+              <p class="desc">ATAR 99.10. Cross Country Co-Captain (2024), AMC Prize (2022), Olympiad mentorship, Da Vinci Decathlon.</p>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">2022 – 2023</div>
+            <div class="what">
+              <p class="title">Curtin University</p>
+              <p class="sub">Rising Scholars Program · Perth</p>
+              <p class="desc">Dual enrolment in Years 10–11, WAM 95.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section id="awards" aria-labelledby="h-awards">
+        <h2 id="h-awards">Awards</h2>
+        <ul class="entries">
+          <li class="entry">
+            <div class="when">2026</div>
+            <div class="what">
+              <p class="title">IMC Prosperity 4</p>
+              <p class="sub">12th globally, 1st in the qualifying rounds</p>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">2023, 2024</div>
+            <div class="what">
+              <p class="title">Australian Informatics Olympiad</p>
+              <p class="sub">Gold</p>
+            </div>
+          </li>
+          <li class="entry">
+            <div class="when">2024</div>
+            <div class="what">
+              <p class="title">Australian Mathematics Olympiad</p>
+              <p class="sub">Bronze</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section id="running" aria-labelledby="h-running">
+        <h2 id="h-running">Running</h2>
+        <table>
+          <thead>
+            <tr><th scope="col">Distance</th><th scope="col">Time</th><th scope="col">Pace /km</th><th scope="col">Year</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>5K</td><td>18:21</td><td>3:40</td><td>2023</td></tr>
+            <tr><td>10K</td><td>39:25</td><td>3:56</td><td>2024</td></tr>
+            <tr><td>Half marathon</td><td>1:29:39</td><td>4:15</td><td>2024</td></tr>
+            <tr><td>Marathon</td><td>4:13:54</td><td>6:01</td><td>2024</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- option-switcher -->
+  <nav class="opt" aria-label="Redesign options">
+    <span>Option</span>
+    <a href="1-plain.html">1</a>
+    <a href="2-sidebar.html" aria-current="page">2</a>
+    <a href="3-refined.html">3</a>
+  </nav>
+  <!-- /option-switcher -->
+
+  <script>
+    (() => {
+      const BASE = 'https://lachy-dauth.github.io/Coding-Challenges/';
+      const load = () => fetch(BASE + 'challenges.json')
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .catch(() => fetch('challenges-snapshot.json').then(r => r.json()));
+      const resolve = href => new URL(href || '', BASE).toString();
+      const firstSentence = s => { const m = (s || '').match(/^.*?[.!?](?=\s|$)/); return m ? m[0] : (s || ''); };
+      const joinTitles = t => t.length < 2 ? t.join('') : t.slice(0, -1).join(', ') + ' and ' + t[t.length - 1];
+      const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
+      const link = (href, text) => { const a = el('a', '', text); a.href = href; a.target = '_blank'; a.rel = 'noopener'; return a; };
+
+      load().then(items => {
+        if (!Array.isArray(items)) return;
+        const featured = items.filter(i => i.featured && !i.directlyFeatured).map(i => i.title);
+        document.getElementById('cc-desc').textContent =
+          `${items.length} interactive projects that run in the browser` +
+          (featured.length ? `, including ${joinTitles(featured)}.` : '.');
+
+        let after = document.getElementById('cc');
+        items.filter(i => i.directlyFeatured).forEach(item => {
+          const li = el('li', 'entry');
+          const what = el('div', 'what');
+          const title = el('p', 'title');
+          title.append(link(resolve(item.href || (item.links && item.links[0] && item.links[0].href)), item.title || ''));
+          what.append(title, el('p', 'desc', firstSentence(item.desc)));
+          const actions = el('div', 'actions');
+          actions.append(el('span', 'pending', 'Part of Coding Challenges'));
+          if (item.links && item.links.length > 1) item.links.forEach(l => actions.append(link(resolve(l.href), l.label)));
+          what.append(actions);
+          li.append(el('div', 'when', item.date || ''), what);
+          after.after(li);
+          after = li;
+        });
+      }).catch(() => {});
+
+      const btn = document.getElementById('copy');
+      const addr = document.getElementById('addr');
+      const select = () => {
+        const r = document.createRange();
+        r.selectNodeContents(addr);
+        const s = window.getSelection();
+        s.removeAllRanges();
+        s.addRange(r);
+      };
+      btn.addEventListener('click', () => {
+        try {
+          navigator.clipboard.writeText(addr.textContent).then(() => {
+            btn.textContent = 'Copied';
+            setTimeout(() => { btn.textContent = 'Copy'; }, 1600);
+          }, select);
+        } catch (e) {
+          select();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
