@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lachlan Dauth</title>
+<meta name="description" content="Lachlan Dauth: Computer Science at UNSW Sydney, quantitative trading at Jane Street, and new bounds for small Ramsey numbers.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&display=swap">
+<style>
+/* Layout: a preprint. One text column near 65ch, a narrow right margin for notes and margin figures, numbered sections. */
+:root {
+  --paper: #fbfcfd;
+  --ink: #17191e;
+  --muted: #586070;
+  --rule: #cfd4dc;
+  --link: #1d3c9f;
+  --stamp: #c5cad2;
+  --sel: #dce4fa;
+  --shadow: rgb(23 29 41 / 0.08);
+  --edge-blue: #2a59cf;
+  --edge-red: #c03a3a;
+  --edge-green: #2c8550;
+  --lamp-on: #d2691c;
+  --lamp-off: #eceef2;
+
+  --serif: "STIX Two Text", "STIX Two", "Times New Roman", Times, serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --measure: 35rem;
+  --margin: 11rem;
+  --colgap: 2.5rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #151920;
+    --ink: #e4e6eb;
+    --muted: #9aa2b0;
+    --rule: #353c48;
+    --link: #9db7ff;
+    --stamp: #2c323d;
+    --sel: #263763;
+    --shadow: rgb(0 0 0 / 0.45);
+    --edge-blue: #6f9bff;
+    --edge-red: #f0746c;
+    --edge-green: #5cc287;
+    --lamp-on: #f39a4a;
+    --lamp-off: #252b35;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #151920;
+  --ink: #e4e6eb;
+  --muted: #9aa2b0;
+  --rule: #353c48;
+  --link: #9db7ff;
+  --stamp: #2c323d;
+  --sel: #263763;
+  --shadow: rgb(0 0 0 / 0.45);
+  --edge-blue: #6f9bff;
+  --edge-red: #f0746c;
+  --edge-green: #5cc287;
+  --lamp-on: #f39a4a;
+  --lamp-off: #252b35;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: 106.25%; -webkit-text-size-adjust: 100%; }
+@media (min-width: 640px) { html { font-size: 112.5%; } }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.55;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  text-rendering: optimizeLegibility;
+  counter-reset: sec fig tab;
+}
+::selection { background: var(--sel); }
+
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
+
+.sc { font-variant-caps: small-caps; letter-spacing: 0.04em; }
+.mono { font-family: var(--mono); font-size: 0.82em; font-variant-numeric: tabular-nums; }
+.m { font-style: normal; white-space: nowrap; font-variant-numeric: lining-nums; }
+.m var { font-style: italic; }
+.ico { width: 0.9em; height: 0.9em; fill: currentColor; flex: none; }
+
+/* ─── sheet ─── */
+.sheet {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 3.5rem 7rem;
+}
+.wrap {
+  max-width: var(--measure);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+@media (min-width: 900px) {
+  .wrap { max-width: calc(var(--measure) + var(--colgap) + var(--margin)); }
+  .wrap > :not(.sec), .sec > :not(.entry):not(.item) { max-width: var(--measure); width: 100%; }
+}
+
+/* ─── title block ─── */
+.titleblock {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+.titleblock h1 {
+  font-size: clamp(2.2rem, 1.5rem + 3vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  margin: 0 0 0.5rem;
+  text-wrap: balance;
+}
+.titleblock p { margin: 0; }
+.affil { font-style: italic; text-wrap: balance; }
+.titleblock .mono { font-size: 0.78rem; }
+.revised { margin-top: 0.45rem !important; font-size: 0.95rem; }
+.stamp { display: none; }
+@media (min-width: 1200px) {
+  .stamp {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: calc(100% + 3.25rem);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 1.3rem;
+    letter-spacing: 0.02em;
+    color: var(--stamp);
+    white-space: nowrap;
+    user-select: none;
+  }
+}
+
+/* ─── abstract ─── */
+.abstract {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding-inline: clamp(0rem, 5vw, 2.25rem);
+  font-size: 0.94rem;
+}
+.abstract p { margin: 0; }
+.runin { font-variant-caps: small-caps; letter-spacing: 0.05em; margin-right: 0.25em; }
+.msc, .fn { font-size: 0.84rem; }
+.fn { color: var(--muted); }
+.fn sup, .abstract sup { font-variant-numeric: lining-nums; line-height: 0; }
+
+/* ─── contents ─── */
+.toc h2 {
+  font-size: 0.92rem;
+  font-weight: 400;
+  font-variant-caps: small-caps;
+  letter-spacing: 0.06em;
+  text-align: center;
+  margin: 0 0 0.6rem;
+}
+.toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 0.2rem 1.5rem;
+}
+.toc a { color: var(--ink); }
+.toc a:hover { color: var(--link); }
+.toc .n { display: inline-block; min-width: 1.5rem; font-variant-numeric: lining-nums tabular-nums; color: var(--muted); }
+
+/* ─── sections ─── */
+.sec {
+  counter-increment: sec;
+  counter-reset: sub;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  padding-top: 1.25rem;
+  scroll-margin-top: 1rem;
+}
+.sec > h2 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-variant-caps: small-caps;
+  letter-spacing: 0.06em;
+  text-align: center;
+  margin: 0;
+}
+.sec > h2::before { content: counter(sec) ".\2002"; font-variant-numeric: lining-nums; }
+.sec--plain { counter-increment: none; }
+.sec--plain > h2::before { content: none; }
+.sec > p { margin: 0; }
+
+/* entries: numbered subsections with run-in heads and margin notes */
+.entry, .item { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.3rem; }
+.entry { counter-increment: sub; }
+.entry-body, .item-body { min-width: 0; }
+.entry-body > h3, .item-body > h3 { display: inline; font-size: 1em; font-weight: 700; margin: 0; }
+.entry-body > h3::after, .item-body > h3::after { content: "."; }
+.entry-body > h3::before { content: counter(sec) "." counter(sub) ".\2002"; font-variant-numeric: lining-nums; }
+.entry-body > h3 + p, .item-body > h3 + p { display: inline; }
+.entry-body > p, .item-body > p { margin: 0; }
+.entry-body > :not(h3):not(h3 + p), .item-body > :not(h3):not(h3 + p) { margin-top: 0.7rem; }
+.role { font-style: italic; }
+@media (min-width: 640px) {
+  .entry-body, .item-body, .abstract > p:first-child { text-align: justify; hyphens: auto; }
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.8rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--muted);
+  min-width: 0;
+}
+.meta-date { font-family: var(--mono); font-size: 0.74rem; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.meta-tags { font-style: italic; }
+.meta-flag { font-variant-caps: all-small-caps; letter-spacing: 0.07em; color: var(--link); }
+
+.mfig { margin: 0.6rem 0 0; max-width: 15rem; }
+.mfig img { display: block; width: 100%; height: auto; border: 1px solid var(--rule); }
+.mfig svg { display: block; width: 100%; height: auto; }
+.mfig figcaption { font-size: 0.78rem; line-height: 1.38; color: var(--muted); margin-top: 0.4rem; }
+.fig { counter-increment: fig; }
+.figlabel { font-variant-caps: small-caps; letter-spacing: 0.04em; color: var(--ink); margin-right: 0.2em; }
+.mfig .figlabel::before { content: "Fig. " counter(fig) "."; font-variant-numeric: lining-nums; }
+.fig-main .figlabel::before { content: "Figure " counter(fig) "."; font-variant-numeric: lining-nums; }
+
+@media (min-width: 900px) {
+  .entry, .item {
+    grid-template-columns: minmax(0, var(--measure)) var(--margin);
+    grid-template-rows: auto auto 1fr;
+    column-gap: var(--colgap);
+    row-gap: 0;
+    align-items: start;
+  }
+  .meta { grid-column: 2; grid-row: 1; flex-direction: column; gap: 0.15rem; padding-top: 0.22rem; }
+  .mfig { grid-column: 2; grid-row: 2; margin: 0.9rem 0 0; max-width: none; }
+  .entry-body, .item-body { grid-column: 1; grid-row: 1 / span 3; }
+}
+
+/* theorem environments (amsthm plain style) */
+.thm { margin: 0; }
+.thm p { margin: 0; font-style: italic; }
+.thm-h { font-style: normal; font-weight: 700; }
+.thm-note { font-style: normal; font-weight: 400; }
+.rem-h, .proof-h { font-style: italic; }
+.qed { float: right; margin-left: 0.6em; }
+
+/* Figure 1 */
+.fig-main { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+.fig-main svg { width: min(14rem, 72%); height: auto; }
+.fig-main figcaption { font-size: 0.86rem; max-width: 30rem; text-align: left; hyphens: manual; }
+.e { fill: none; stroke-width: 1.7; stroke-linecap: round; }
+.e-b { stroke: var(--edge-blue); }
+.e-r { stroke: var(--edge-red); }
+.e-g { stroke: var(--edge-green); stroke-dasharray: 4.5 3.5; }
+.v { fill: var(--paper); stroke: var(--ink); stroke-width: 1.4; }
+
+/* 8-bit register */
+.lamp { fill: var(--lamp-off); stroke: var(--rule); stroke-width: 1; transition: fill 0.25s ease, stroke 0.25s ease; }
+.lamp.on { fill: var(--lamp-on); stroke: var(--lamp-on); }
+.reg-bit { fill: var(--muted); font-family: var(--mono); font-size: 7px; text-anchor: middle; }
+.reg-val { fill: var(--ink); font-family: var(--mono); font-size: 9.5px; }
+
+/* links under an entry */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.3rem;
+  font-variant-caps: small-caps;
+  letter-spacing: 0.035em;
+}
+.links a { display: inline-flex; align-items: center; gap: 0.35em; }
+.soon { color: var(--muted); }
+.cite { font-variant-numeric: lining-nums; white-space: nowrap; }
+
+/* lists inside items */
+.item-body ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.2rem; }
+.item-body li { position: relative; padding-left: 1.1rem; }
+.item-body li::before { content: "\2013"; position: absolute; left: 0; color: var(--muted); }
+
+/* booktabs table */
+.tbl { margin: 0; counter-increment: tab; }
+.tbl { display: flex; flex-direction: column; align-items: center; }
+.tbl figcaption { font-size: 0.9rem; margin-bottom: 0.55rem; text-align: center; }
+.tbl .figlabel::before { content: "Table " counter(tab) "."; font-variant-numeric: lining-nums; }
+.tablewrap { overflow-x: auto; max-width: 100%; }
+table { border-collapse: collapse; font-variant-numeric: lining-nums tabular-nums; }
+th, td { padding: 0.38rem clamp(0.6rem, 2.5vw, 1.4rem); text-align: left; white-space: nowrap; }
+th:first-child, td:first-child { padding-left: 0.15rem; }
+th:last-child, td:last-child { padding-right: 0.15rem; }
+thead th { font-weight: 400; font-style: italic; border-top: 1.5px solid var(--ink); border-bottom: 0.75px solid var(--ink); padding-top: 0.5rem; }
+tbody tr:first-child td { padding-top: 0.55rem; }
+tbody tr:last-child td { border-bottom: 1.5px solid var(--ink); padding-bottom: 0.55rem; }
+.num { text-align: right; }
+
+/* references */
+.bib { list-style: none; margin: 0; padding: 0; counter-reset: bib; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.95rem; }
+.bib li { counter-increment: bib; display: grid; grid-template-columns: 2.3rem minmax(0, 1fr); scroll-margin-top: 1rem; }
+.bib li::before { content: "[" counter(bib) "]"; font-variant-numeric: lining-nums; }
+.bib li:target { background: var(--sel); }
+.url { font-family: var(--mono); font-size: 0.78rem; overflow-wrap: anywhere; }
+.bib .ico { vertical-align: -0.1em; margin-right: 0.3em; }
+.copy {
+  font: inherit;
+  font-size: 0.78rem;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.07em;
+  color: var(--link);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0 0.45rem;
+  margin-left: 0.4rem;
+  cursor: pointer;
+  vertical-align: 0.05em;
+}
+.copy:hover { border-color: var(--link); }
+
+.colophon { font-size: 0.8rem; color: var(--muted); text-align: center; }
+
+/* option-switcher */
+.opt {
+  position: fixed;
+  right: calc(10px + env(safe-area-inset-right, 0px));
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  z-index: 20;
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  padding: 0.3rem 0.75rem 0.35rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  box-shadow: 0 1px 2px var(--shadow), 0 6px 18px var(--shadow);
+  font-size: 0.8rem;
+  font-variant-caps: small-caps;
+  letter-spacing: 0.04em;
+}
+.opt-label { color: var(--muted); }
+.opt a[aria-current="page"] { color: var(--ink); text-decoration: underline; text-underline-offset: 0.22em; }
+@media (max-width: 480px) { .opt-label { display: none; } }
+/* /option-switcher */
+
+@media (prefers-reduced-motion: reduce) {
+  .lamp { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <main class="wrap">
+
+    <header class="titleblock">
+      <p class="stamp" aria-hidden="true">Preprint · UNSW Sydney · Revised October 2026</p>
+      <h1>Lachlan Dauth</h1>
+      <p class="affil">School of Computer Science and Engineering, UNSW Sydney</p>
+      <p class="sc">Sydney, NSW, Australia</p>
+      <p><a class="mono" href="#ref-6">lachydauth@gmail.com</a></p>
+      <p class="revised">Revised October 2026</p>
+    </header>
+
+    <section class="abstract" aria-label="Abstract">
+      <p><span class="runin">Abstract.</span> Lachlan Dauth studies Computer Science at UNSW Sydney, with a WAM of 91.<sup><a href="#fn1" id="fnref1" aria-label="Footnote 1">1</a></sup> He was a quantitative trading intern at Jane Street in Hong Kong from June to August 2026. He returns there as a quantitative trading intern from 7 December 2026 to 12 February 2027 and joins as a graduate quantitative trader in 2027. His recent research gives new bounds for small Ramsey numbers, among them <span class="m"><var>R</var>(4,&thinsp;4,&thinsp;4) ≤ 198</span>. He won gold at the Australian Informatics Olympiad and bronze at the Australian Mathematics Olympiad.</p>
+      <p class="msc"><span class="sc">2020 Mathematics Subject Classification.</span> 05C55, 05D10.<br><span class="sc">Key words and phrases.</span> Ramsey numbers, flag algebras, algorithms, quantitative trading.</p>
+      <p class="fn" id="fn1"><sup>1</sup> Weighted average mark. At UNSW, 85 and above is a High Distinction. <a href="#fnref1" aria-label="Back to text">↩</a></p>
+    </section>
+
+    <nav class="toc" aria-labelledby="toc-h">
+      <h2 id="toc-h">Contents</h2>
+      <ol>
+        <li><a href="#research"><span class="n">1</span>Research</a></li>
+        <li><a href="#projects"><span class="n">2</span>Projects</a></li>
+        <li><a href="#experience"><span class="n">3</span>Experience</a></li>
+        <li><a href="#education"><span class="n">4</span>Education</a></li>
+        <li><a href="#awards"><span class="n">5</span>Awards</a></li>
+        <li><a href="#running"><span class="n">6</span>Running</a></li>
+        <li><a href="#references"><span class="n"></span>References</a></li>
+      </ol>
+    </nav>
+
+    <!-- 1. RESEARCH -->
+    <section class="sec" id="research" aria-labelledby="research-h">
+      <h2 id="research-h">Research</h2>
+
+      <article class="entry" id="ramsey-2">
+        <div class="meta">
+          <span class="meta-date">Oct 2026</span>
+          <span class="meta-tags">Research, combinatorics, flag algebras, Python</span>
+          <span class="meta-flag">Ramsey research 2.0</span>
+        </div>
+        <div class="entry-body">
+          <h3>New bounds for small Ramsey numbers</h3>
+          <p>Two preprints <a class="cite" href="#ref-1">[1,&thinsp;2]</a> with new bounds for small two-, three- and four-colour Ramsey numbers, released with certificates and exact checkers for every computer-assisted claim.</p>
+          <div class="thm">
+            <p><span class="thm-h">Theorem A</span> <span class="thm-note">(three colours)</span><span class="thm-h">.</span> <span class="m"><var>R</var>(4,&thinsp;4,&thinsp;4) ≤ 198</span> and <span class="m"><var>R</var>(3,&thinsp;4,&thinsp;4) ≤ 73</span>.</p>
+          </div>
+          <p>The previous upper bounds were 229 and 77.</p>
+          <div class="thm">
+            <p><span class="thm-h">Theorem B</span> <span class="thm-note">(two colours)</span><span class="thm-h">.</span> <span class="m"><var>R</var>(4,&thinsp;21) ≥ 260</span> and <span class="m"><var>R</var>(4,&thinsp;24) ≥ 370</span>.</p>
+          </div>
+          <p>These improve the lower bounds of 242 and 343.</p>
+          <p><span class="rem-h">Remark.</span> The main new tool is a flag-algebra certificate whose constraints include <em>local caps</em>: each bounds an intersection of colour neighbourhoods by a smaller Ramsey number. Every certificate is re-checked in exact arithmetic by verifiers that share no code with the searches that found it. Both papers are preprints and not yet peer reviewed.</p>
+          <figure class="fig fig-main">
+            <svg viewBox="14 10 172 165" role="img" aria-labelledby="k6-t">
+              <title id="k6-t">The complete graph on six vertices with edges in three colours and no single-colour triangle</title>
+              <g>
+                <line class="e e-g" x1="100" y1="100" x2="100"   y2="20"/>
+                <line class="e e-g" x1="100" y1="100" x2="176.1" y2="75.3"/>
+                <line class="e e-g" x1="100" y1="100" x2="147"   y2="164.7"/>
+                <line class="e e-g" x1="100" y1="100" x2="53"    y2="164.7"/>
+                <line class="e e-g" x1="100" y1="100" x2="23.9"  y2="75.3"/>
+              </g>
+              <g>
+                <line class="e e-r" x1="100"   y1="20"    x2="147"  y2="164.7"/>
+                <line class="e e-r" x1="100"   y1="20"    x2="53"   y2="164.7"/>
+                <line class="e e-r" x1="176.1" y1="75.3"  x2="53"   y2="164.7"/>
+                <line class="e e-r" x1="176.1" y1="75.3"  x2="23.9" y2="75.3"/>
+                <line class="e e-r" x1="147"   y1="164.7" x2="23.9" y2="75.3"/>
+              </g>
+              <g>
+                <line class="e e-b" x1="100"   y1="20"    x2="176.1" y2="75.3"/>
+                <line class="e e-b" x1="176.1" y1="75.3"  x2="147"   y2="164.7"/>
+                <line class="e e-b" x1="147"   y1="164.7" x2="53"    y2="164.7"/>
+                <line class="e e-b" x1="53"    y1="164.7" x2="23.9"  y2="75.3"/>
+                <line class="e e-b" x1="23.9"  y1="75.3"  x2="100"   y2="20"/>
+              </g>
+              <g>
+                <circle class="v" cx="100"   cy="20"    r="4.6"/>
+                <circle class="v" cx="176.1" cy="75.3"  r="4.6"/>
+                <circle class="v" cx="147"   cy="164.7" r="4.6"/>
+                <circle class="v" cx="53"    cy="164.7" r="4.6"/>
+                <circle class="v" cx="23.9"  cy="75.3"  r="4.6"/>
+                <circle class="v" cx="100"   cy="100"   r="4.6"/>
+              </g>
+            </svg>
+            <figcaption><span class="figlabel"></span> A colouring of the edges of <span class="m"><var>K</var><sub>6</sub></span> in three colours with no monochromatic triangle. On the outer five vertices, the blue pentagon and red pentagram show <span class="m"><var>R</var>(3,&thinsp;3) &gt; 5</span>; the dashed green edges join the centre.</figcaption>
+          </figure>
+          <p class="links">
+            <a href="https://github.com/Lachy-Dauth/ramsey-neighbourhood-counting" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Papers, code and certificates</a>
+            <span class="soon">arXiv: coming soon</span>
+          </p>
+        </div>
+      </article>
+
+      <article class="entry" id="ramsey-1">
+        <div class="meta">
+          <span class="meta-date">Oct 2025</span>
+          <span class="meta-tags">Research, combinatorics, algorithms, Python</span>
+          <span class="meta-flag">COMP3821</span>
+        </div>
+        <div class="entry-body">
+          <h3>Extremal Ramsey graphs</h3>
+          <p>A research project for COMP3821 (Extended Algorithm Design and Analysis) on computational bounds for Ramsey numbers and the properties of extremal Ramsey graphs <a class="cite" href="#ref-3">[3]</a>. His contributions are below, together with a generator for 3-colour Ramsey graphs used to search for lower bounds.</p>
+          <div class="thm">
+            <p><span class="thm-h">Proposition C.</span> The Extension Conjecture and the Degree Difference Conjecture are false.</p>
+          </div>
+          <p><span class="proof-h">Proof.</span> A counterexample search over McKay’s database of Ramsey graphs finds counterexamples to both.<span class="qed" aria-hidden="true">□</span></p>
+          <p class="links">
+            <a href="https://lachy-dauth.github.io/COMP3821_Project.pdf" target="_blank" rel="noopener">Read the report (PDF)</a>
+            <a href="https://github.com/Lachy-Dauth/3821-Ramsey" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a>
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <!-- 2. PROJECTS -->
+    <section class="sec" id="projects" aria-labelledby="projects-h">
+      <h2 id="projects-h">Projects</h2>
+
+      <article class="entry" id="cc">
+        <div class="meta">
+          <span class="meta-date">Apr 2022 – present</span>
+          <span class="meta-tags">JavaScript, algorithms, simulations, theory</span>
+        </div>
+        <div class="entry-body">
+          <h3>Coding Challenges</h3>
+          <p id="cc-desc">A collection of self-contained interactive projects that run in the browser, from automata and Turing machines to cellular automata and flocking simulations.</p>
+          <p class="links"><a href="https://lachy-dauth.github.io/Coding-Challenges/" target="_blank" rel="noopener">Browse the collection</a></p>
+        </div>
+      </article>
+
+      <article class="entry" id="chess">
+        <div class="meta">
+          <span class="meta-date">Mar 2023</span>
+          <span class="meta-tags">JavaScript, AI, algorithms</span>
+        </div>
+        <div class="entry-body">
+          <h3>JS Chess Engine</h3>
+          <p>A playable chess engine with an AI opponent, written from scratch in JavaScript: move generation, board evaluation, and minimax search with alpha-beta pruning.</p>
+          <p class="links"><a href="https://lachy-dauth.github.io/chess-engine/" target="_blank" rel="noopener">Play the engine</a></p>
+        </div>
+        <figure class="mfig fig">
+          <img src="../images/Chess-engine.png" alt="The chess engine's board in the browser" width="740" height="740" loading="lazy">
+          <figcaption><span class="figlabel"></span> The engine’s board.</figcaption>
+        </figure>
+      </article>
+
+      <article class="entry" id="wordle">
+        <div class="meta">
+          <span class="meta-date">Aug 2022</span>
+          <span class="meta-tags">JavaScript, information theory, algorithms</span>
+        </div>
+        <div class="entry-body">
+          <h3>Wordle Solver</h3>
+          <p>An optimal Wordle solver built on information theory. Each guess is chosen to maximise the expected information gain, and the solver consistently finishes in under four guesses.</p>
+          <p class="links"><a href="https://wordlesolver.github.io/" target="_blank" rel="noopener">Open the solver</a></p>
+        </div>
+        <figure class="mfig fig">
+          <img src="../images/wordle-solver.png" alt="The Wordle solver with a solved board and a ranked list of candidate words" width="1000" height="800" loading="lazy">
+          <figcaption><span class="figlabel"></span> A solved board with ranked candidates.</figcaption>
+        </figure>
+      </article>
+
+      <article class="entry" id="minecraft">
+        <div class="meta">
+          <span class="meta-date">Jan 2023</span>
+          <span class="meta-tags">Computer architecture, logic gates, assembly</span>
+        </div>
+        <div class="entry-body">
+          <h3>8-bit Minecraft Computer</h3>
+          <p>A working 8-bit computer built from redstone logic gates in Minecraft. It runs custom assembly programs, including Fibonacci and multiplication.</p>
+          <p class="links"><a href="https://www.youtube.com/watch?v=j0--xt6fRqE" target="_blank" rel="noopener">Watch it run on YouTube</a></p>
+        </div>
+        <figure class="mfig fig">
+          <svg id="reg" viewBox="0 0 178 58" role="img" aria-label="An 8-bit register of redstone lamps stepping through Fibonacci numbers in binary">
+            <rect class="lamp"    x="1"   y="4" width="18" height="18" rx="1"/>
+            <rect class="lamp"    x="23"  y="4" width="18" height="18" rx="1"/>
+            <rect class="lamp"    x="45"  y="4" width="18" height="18" rx="1"/>
+            <rect class="lamp"    x="67"  y="4" width="18" height="18" rx="1"/>
+            <rect class="lamp on" x="89"  y="4" width="18" height="18" rx="1"/>
+            <rect class="lamp on" x="111" y="4" width="18" height="18" rx="1"/>
+            <rect class="lamp"    x="133" y="4" width="18" height="18" rx="1"/>
+            <rect class="lamp on" x="155" y="4" width="18" height="18" rx="1"/>
+            <text class="reg-bit" x="10"  y="33">7</text>
+            <text class="reg-bit" x="32"  y="33">6</text>
+            <text class="reg-bit" x="54"  y="33">5</text>
+            <text class="reg-bit" x="76"  y="33">4</text>
+            <text class="reg-bit" x="98"  y="33">3</text>
+            <text class="reg-bit" x="120" y="33">2</text>
+            <text class="reg-bit" x="142" y="33">1</text>
+            <text class="reg-bit" x="164" y="33">0</text>
+            <text class="reg-val" id="reg-val" x="1" y="52">13 = 00001101₂</text>
+          </svg>
+          <figcaption><span class="figlabel"></span> An 8-bit register stepping through the Fibonacci numbers, one of the programs the computer runs.</figcaption>
+        </figure>
+      </article>
+
+      <article class="entry" id="prosperity">
+        <div class="meta">
+          <span class="meta-date">Apr 2026</span>
+          <span class="meta-tags">JavaScript, Web Workers, IndexedDB, visualisation</span>
+        </div>
+        <div class="entry-body">
+          <h3>OpenProsperity Visualizer</h3>
+          <p>A local-first, open-source dashboard for IMC Prosperity 4, the algorithmic trading competition. Load any number of backtest logs and compare strategies side by side across synchronised PnL, order-book, position and own-fills views. Logs are parsed in a Web Worker, so nothing leaves the browser.</p>
+          <p class="links"><a href="https://lachy-dauth.github.io/Prosperity-Visualizer/" target="_blank" rel="noopener">Open the visualiser</a></p>
+        </div>
+      </article>
+    </section>
+
+    <!-- 3. EXPERIENCE -->
+    <section class="sec" id="experience" aria-labelledby="experience-h">
+      <h2 id="experience-h">Experience</h2>
+
+      <article class="item">
+        <div class="meta">
+          <span class="meta-date">7 Dec 2026 – 12 Feb 2027</span>
+          <span class="meta-flag">To appear</span>
+        </div>
+        <div class="item-body">
+          <h3>Jane Street</h3>
+          <p><span class="role">Returning Quantitative Trading Intern,</span> Hong Kong.</p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="meta">
+          <span class="meta-date">2027</span>
+          <span class="meta-flag">To appear</span>
+        </div>
+        <div class="item-body">
+          <h3>Jane Street</h3>
+          <p><span class="role">Graduate Quantitative Trader,</span> Hong Kong.</p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="meta"><span class="meta-date">Jun – Aug 2026</span></div>
+        <div class="item-body">
+          <h3>Jane Street</h3>
+          <p><span class="role">Quantitative Trading Intern,</span> Hong Kong.</p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="meta"><span class="meta-date">Sep 2025</span></div>
+        <div class="item-body">
+          <h3>IMC Launchpad</h3>
+          <p><span class="role">Trader Stream,</span> Sydney. Placed 1st in the final trading competition across all participants.</p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="meta"><span class="meta-date">Jan – Oct 2025</span></div>
+        <div class="item-body">
+          <h3>WiseTech Global</h3>
+          <p><span class="role">Associate Software Engineer,</span> Sydney.</p>
+          <ul>
+            <li>Worked 90% of full-time hours alongside full-time university study.</li>
+            <li>Rotated through the data science and front-end teams.</li>
+            <li>Designed and maintained ETL pipelines that load logistics data into the analytics team’s database.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="meta"><span class="meta-date">Dec 2024 – Jan 2025</span></div>
+        <div class="item-body">
+          <h3><a href="https://www.narwhaltutoring.com/" target="_blank" rel="noopener">Narwhal Tutoring</a></h3>
+          <p><span class="role">Web Developer,</span> Perth. Improved the user experience and automated business processes for tutors and clients.</p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="meta"><span class="meta-date">Jan – Dec 2024</span></div>
+        <div class="item-body">
+          <h3>3E Learning</h3>
+          <p><span class="role">Mathematics Tutor,</span> Perth. Tutored students in years 6–8 in mathematics and Python programming.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- 4. EDUCATION -->
+    <section class="sec" id="education" aria-labelledby="education-h">
+      <h2 id="education-h">Education</h2>
+
+      <article class="item">
+        <div class="meta"><span class="meta-date">2025 – Aug 2027</span><span class="meta-flag">Expected</span></div>
+        <div class="item-body">
+          <h3>UNSW Sydney</h3>
+          <p><span class="role">B.Sc. Computer Science.</span> WAM 91 (High Distinction). Dean’s List 2025.</p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="meta"><span class="meta-date">Jan 2024</span></div>
+        <div class="item-body">
+          <h3>National Mathematics Summer School</h3>
+          <p><span class="role">Canberra.</span> Selected among Australia’s top high school mathematicians for a two-week residential program in proof-based mathematics.</p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="meta"><span class="meta-date">2017 – 2024</span></div>
+        <div class="item-body">
+          <h3>Scotch College, Perth</h3>
+          <p><span class="role">High school.</span> ATAR 99.10. Cross Country Co-Captain (2024), AMC Prize (2022), Olympiad mentorship, Da Vinci Decathlon.</p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="meta"><span class="meta-date">2022 – 2023</span></div>
+        <div class="item-body">
+          <h3>Curtin University</h3>
+          <p><span class="role">Rising Scholars Program,</span> Perth. Dual enrolment in Years 10–11, WAM 95.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- 5. AWARDS -->
+    <section class="sec" id="awards" aria-labelledby="awards-h">
+      <h2 id="awards-h">Awards</h2>
+
+      <article class="item">
+        <div class="meta"><span class="meta-date">2026</span></div>
+        <div class="item-body">
+          <h3>IMC Prosperity 4</h3>
+          <p>12th overall globally and 1st in the qualifying rounds.</p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="meta"><span class="meta-date">2023, 2024</span></div>
+        <div class="item-body">
+          <h3>Australian Informatics Olympiad</h3>
+          <p>Gold, in both years.</p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="meta"><span class="meta-date">2024</span></div>
+        <div class="item-body">
+          <h3>Australian Mathematics Olympiad</h3>
+          <p>Bronze.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- 6. RUNNING -->
+    <section class="sec" id="running" aria-labelledby="running-h">
+      <h2 id="running-h">Running</h2>
+      <p>Outside work he runs. <a href="#pbs">Table 1</a> lists his personal bests.</p>
+      <figure class="tbl" id="pbs">
+        <figcaption><span class="figlabel"></span> Personal bests.</figcaption>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Distance</th>
+                <th scope="col" class="num">Time</th>
+                <th scope="col" class="num">Pace per km</th>
+                <th scope="col" class="num">Year</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>5 km</td><td class="num">18:21</td><td class="num">3:40</td><td class="num">2023</td></tr>
+              <tr><td>10 km</td><td class="num">39:25</td><td class="num">3:56</td><td class="num">2024</td></tr>
+              <tr><td>Half marathon</td><td class="num">1:29:39</td><td class="num">4:15</td><td class="num">2024</td></tr>
+              <tr><td>Marathon</td><td class="num">4:13:54</td><td class="num">6:01</td><td class="num">2024</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+    </section>
+
+    <!-- REFERENCES / CONTACT -->
+    <section class="sec sec--plain" id="references" aria-labelledby="references-h">
+      <h2 id="references-h">References</h2>
+      <ol class="bib">
+        <li id="ref-1"><span>L. Dauth, <i>Neighbourhood counting and new bounds for small three-colour Ramsey numbers</i>, preprint, 2026. arXiv version coming soon. Code and certificates: <a class="url" href="https://github.com/Lachy-Dauth/ramsey-neighbourhood-counting" target="_blank" rel="noopener">github.com/Lachy-Dauth/ramsey-neighbourhood-counting</a>.</span></li>
+        <li id="ref-2"><span>L. Dauth, <i>New bounds for small two- and four-colour Ramsey numbers</i>, preprint, 2026. arXiv version coming soon. Same repository as [1].</span></li>
+        <li id="ref-3"><span><i>Ramsey numbers research</i>, COMP3821 project report, UNSW Sydney, 2025. <a href="https://lachy-dauth.github.io/COMP3821_Project.pdf" target="_blank" rel="noopener">PDF</a>; code at <a class="url" href="https://github.com/Lachy-Dauth/3821-Ramsey" target="_blank" rel="noopener">github.com/Lachy-Dauth/3821-Ramsey</a>.</span></li>
+        <li id="ref-4"><span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>GitHub: <a class="url" href="https://github.com/Lachy-Dauth" target="_blank" rel="noopener">github.com/Lachy-Dauth</a>.</span></li>
+        <li id="ref-5"><span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.937 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 4.892v6.249zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn: <a class="url" href="https://www.linkedin.com/in/lachlan-dauth-9b3951235/" target="_blank" rel="noopener">linkedin.com/in/lachlan-dauth-9b3951235</a>.</span></li>
+        <li id="ref-6"><span><i>Email address:</i> <a class="url" id="email" href="mailto:lachydauth@gmail.com">lachydauth@gmail.com</a><button type="button" class="copy" id="copy-email">Copy</button></span></li>
+      </ol>
+    </section>
+
+    <p class="colophon">Set in STIX Two Text. Last revised October 2026.</p>
+
+  </main>
+</div>
+
+<!-- option-switcher -->
+<nav class="opt" aria-label="Design options">
+  <span class="opt-label">Option</span>
+  <a href="a-preprint.html" aria-current="page">A · Preprint</a>
+  <a href="b-terminal.html">B · Terminal</a>
+  <a href="c-graph.html">C · Graph</a>
+</nav>
+<!-- /option-switcher -->
+
+<script>
+(() => {
+  // ── Coding Challenges: live list, with a local snapshot as fallback ──
+  const BASE = 'https://lachy-dauth.github.io/Coding-Challenges/';
+  const el = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  };
+  const abs = href => { try { return new URL(href || '', BASE).toString(); } catch (e) { return BASE; } };
+  const getJSON = async url => {
+    const r = await fetch(url, { cache: 'no-cache' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  };
+  const loadChallenges = async () => {
+    try { return await getJSON(BASE + 'challenges.json'); }
+    catch (e) { return getJSON('challenges-snapshot.json'); }
+  };
+  const listFormat = items => {
+    try { return new Intl.ListFormat('en', { style: 'long', type: 'conjunction' }).format(items); }
+    catch (e) { return items.join(', '); }
+  };
+
+  function buildEntry(item) {
+    const art = el('article', 'entry');
+    const meta = el('div', 'meta');
+    if (item.date) meta.append(el('span', 'meta-date', item.date));
+    const chips = (item.chips || []).slice(0, 4);
+    if (chips.length) meta.append(el('span', 'meta-tags', chips.join(', ')));
+    meta.append(el('span', 'meta-flag', 'Part of Coding Challenges'));
+
+    const body = el('div', 'entry-body');
+    body.append(el('h3', null, item.title || 'Untitled'), document.createTextNode(' '), el('p', null, item.desc || ''));
+    const links = el('p', 'links');
+    const targets = Array.isArray(item.links) && item.links.length ? item.links : [{ href: item.href }];
+    targets.forEach(t => {
+      const a = el('a', null, t.label ? 'Open ' + t.label : 'Open the project');
+      a.href = abs(t.href);
+      a.target = '_blank';
+      a.rel = 'noopener';
+      links.append(a);
+    });
+    body.append(links);
+    art.append(meta, body);
+    return art;
+  }
+
+  loadChallenges().then(items => {
+    if (!Array.isArray(items) || !items.length) return;
+    const highlights = items.filter(i => i.featured && !i.directlyFeatured).map(i => i.title).filter(Boolean);
+    document.getElementById('cc-desc').textContent =
+      'A collection of ' + items.length + ' self-contained interactive projects that run in the browser' +
+      (highlights.length ? ', including ' + listFormat(highlights) + '.' : '.');
+    let after = document.getElementById('cc');
+    items.filter(i => i.directlyFeatured).forEach(item => {
+      const node = buildEntry(item);
+      after.after(node);
+      after = node;
+    });
+  }).catch(() => { /* keep the static description */ });
+
+  // ── 8-bit register: step through Fibonacci numbers ──
+  const lamps = Array.from(document.querySelectorAll('#reg .lamp'));
+  const val = document.getElementById('reg-val');
+  const fib = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233];
+  const show = n => {
+    lamps.forEach((r, i) => r.classList.toggle('on', ((n >> (7 - i)) & 1) === 1));
+    val.textContent = n + ' = ' + n.toString(2).padStart(8, '0') + '₂';
+  };
+  const still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!still) {
+    let k = 6;
+    setInterval(() => {
+      if (document.hidden) return;
+      k = (k + 1) % fib.length;
+      show(fib[k]);
+    }, 1400);
+  }
+
+  // ── Copy email ──
+  const btn = document.getElementById('copy-email');
+  const addr = document.getElementById('email');
+  const selectAddr = () => {
+    const range = document.createRange();
+    range.selectNodeContents(addr);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    btn.textContent = 'Selected: press Ctrl+C or ⌘C';
+  };
+  btn.addEventListener('click', () => {
+    try {
+      navigator.clipboard.writeText('lachydauth@gmail.com').then(() => {
+        btn.textContent = 'Copied';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 1800);
+      }).catch(selectAddr);
+    } catch (e) {
+      selectAddr();
+    }
+  });
+})();
+</script>
+</body>
+</html>
